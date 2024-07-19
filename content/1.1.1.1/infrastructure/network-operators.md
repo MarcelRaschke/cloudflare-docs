@@ -5,7 +5,7 @@ title: Network operators
 
 # Network operators
 
-Network operators, including Internet Service Providers (ISPs), device manufacturers, public WiFi networks, municipal broadband providers, and security scanning services can use [1.1.1.1](/1.1.1.1/setup/) and [1.1.1.1 for Families](/1.1.1.1/setup/#1111-for-families) in place of operating their own recursive DNS infrastructure.
+Network operators, including Internet Service Providers (ISPs), device manufacturers, public Wi-Fi networks, municipal broadband providers, and security scanning services can use [1.1.1.1](/1.1.1.1/setup/) and [1.1.1.1 for Families](/1.1.1.1/setup/#1111-for-families) in place of operating their own recursive DNS infrastructure.
 
 Using 1.1.1.1 can improve performance for end-users due to Cloudflare's extensive [global network](https://www.cloudflare.com/network/), as well as provide higher overall cache hit rates due to our regional caches.
 
@@ -25,7 +25,7 @@ Where possible, we recommend using encrypted transports (DNS over HTTPS or TLS) 
 
 {{<Aside type="note">}}
 
-[Cloudflare Zero Trust](https://www.cloudflare.com/products/zero-trust/) supports customizable [DNS policies](/cloudflare-one/policies/filtering/dns-policies/), analytics, additional built-in filtering categories, and custom rate limiting capabilities.
+[Cloudflare Zero Trust](https://www.cloudflare.com/products/zero-trust/) supports customizable [DNS policies](/cloudflare-one/policies/gateway/dns-policies/), analytics, additional built-in filtering categories, and custom rate limiting capabilities.
 
 If you require additional controls over our public 1.1.1.1 resolver, [contact us](https://www.cloudflare.com/products/zero-trust/).
 
@@ -33,13 +33,13 @@ If you require additional controls over our public 1.1.1.1 resolver, [contact us
 
 The publicly available endpoints for 1.1.1.1 are detailed in the following table:
 
-{{<table-wrap>}}
+{{<table-wrap style="font-size: 85%">}}
 
-Resolver | IP Addresses | DNS over HTTPS endpoint | DNS over TLS endpoint
----|---|---|---
-1.1.1.1 (unfiltered) | `1.1.1.1` / `1.0.0.1` | `https://cloudflare-dns.com/dns-query` | `cloudflare-dns.com`
-Families (Malware) | `1.1.1.2` / `1.0.0.2` | `https://security.cloudflare-dns.com/dns-query` | `security.cloudflare-dns.com`
-Families (Adult Content + Malware) | `1.1.1.3` / `1.0.0.3` | `https://family.cloudflare-dns.com/dns-query` | `family.cloudflare-dns.com`
+Resolver | IPv4 address | IPv6 <br /> address | DNS over <br /> HTTPS endpoint | DNS over <br /> TLS endpoint
+--- | --- | --- | --- | ---
+1.1.1.1 <br />(unfiltered) | `1.1.1.1` <br /> `1.0.0.1` | `2606:4700:4700::1111` <br /> `2606:4700:4700::1001` | `https://cloudflare-dns.com/dns-query` | `cloudflare-dns.com`
+Families <br />(Malware) | `1.1.1.2` <br /> `1.0.0.2` | `2606:4700:4700::1112` <br /> `2606:4700:4700::1002` | `https://security.cloudflare-dns.com/dns-query` | `security.cloudflare-dns.com`
+Families <br />(Adult Content + Malware) | `1.1.1.3` <br /> `1.0.0.3` | `2606:4700:4700::1113` <br /> `2606:4700:4700::1003` | `https://family.cloudflare-dns.com/dns-query` | `family.cloudflare-dns.com`
 
 {{</table-wrap>}}
 
@@ -54,4 +54,6 @@ Best practices include:
 * Avoiding tunneling or proxying all queries from a single IP address at high rates. Distributing queries across multiple public IPs will improve this without impacting cache hit rates (caches are regional).
 * A high rate of "uncacheable" responses (such as `SERVFAIL`) against the same domain may be rate limited to protect upstream, authoritative nameservers. Many authoritative nameservers enforce their own rate limits, and we strive to avoid overloading third party infrastructure where possible.
 
-If you are a network operator and still have outstanding questions, contact `resolver@cloudflare.com` with your use case and we will be happy to discuss further.
+## Help
+
+If you are a network operator and still have outstanding questions, contact `resolver@cloudflare.com` with your use case, so it can be discussed further. Make sure to visit [1.1.1.1/help](https://one.one.one.one/help) from within your network and share the resulting report when contacting Cloudflare.

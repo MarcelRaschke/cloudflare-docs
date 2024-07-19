@@ -2,7 +2,6 @@
 title: Enable Datadog
 pcx_content_type: how-to
 weight: 59
-layout: single
 meta:
   title: Enable Logpush to Datadog
 ---
@@ -13,55 +12,52 @@ Cloudflare Logpush supports pushing logs directly to Datadog via the Cloudflare 
 
 ## Manage via the Cloudflare dashboard
 
-Enable Logpush to Datadog via the dashboard.
+{{<render file="_enable-logpush-job.md">}}
 
-To enable the Cloudflare Logpush service:
+5.  In **Select a destination**, choose **Datadog**.
 
-1.  Log in to the Cloudflare dashboard.
-
-2.  Select the Enterprise domain you want to use with Logpush.
-
-3.  Go to **Analytics** > **Logs**.
-
-4.  Click **Connect a service**. A modal window opens where you will need to complete several steps.
-
-5.  Select the dataset you want to push to a storage service.
-
-6.  Select the data fields to include in your logs. Add or remove fields later by modifying your settings in **Logs** > **Logpush**.
-
-7.  Select **Datadog**.
-
-8.  Enter or select the following destination information:
-
+6. Enter or select the following destination information:
     - **Datadog URL Endpoint**, which can be either one below. You can find the difference at [Datadog API reference](https://docs.datadoghq.com/api/latest/logs/).
 
     {{<tabs labels="V1 | V2">}}
-    {{<tab label="v1" no-code="true">}}
- 
-  `https://http-intake.logs.datadoghq.com/v1/input`
- 
-    {{</tab>}}
-    {{<tab label="v2" no-code="true">}}
- 
-  `https://http-intake.logs.datadoghq.com/api/v2/logs`
- 
-    {{</tab>}}
+  {{<tab label="v1" no-code="true">}}
+
+* `https://http-intake.logs.datadoghq.com/v1/input`
+
+  {{</tab>}}
+  {{<tab label="v2" no-code="true">}}
+
+* `https://http-intake.logs.datadoghq.com/api/v2/logs`
+
+  {{</tab>}}
     {{</tabs>}}
 
     - **Datadog API Key**, can be retrieved by following [these steps](https://docs.datadoghq.com/account_management/api-app-keys/#add-an-api-key-or-client-token).
-    
-9.  Click **Validate access**.
 
-10. Click **Save and Start Pushing** to finish enabling Logpush.
+    - **Service**, **Hostname**, **Datadog ddsource field**, and **ddtags** fields can be set as URL parameters. For more information, refer to the [Logs section](https://docs.datadoghq.com/api/latest/logs/) in Datadog's documentation. While these parameters are optional, they can be useful for indexing or processing logs. Note that the values of these parameters may contain special characters, which should be URL encoded.
 
-Once connected, Cloudflare lists Datadog as a connected service under **Logs** > **Logpush**. Edit or remove connected services from here.
+When you are done entering the destination details, select **Continue**.
+
+7. Select the dataset to push to the storage service.
+
+8. In the next step, you need to configure your logpush job:
+    - Enter the **Job name**.
+    - Under **If logs match**, you can select the events to include and/or remove from your logs. Refer to [Filters](/logs/reference/filters/) for more information. Not all datasets have this option available.
+    - In **Send the following fields**, you can choose to either push all logs to your storage destination or selectively choose which logs you want to push.
+
+9. In **Advanced Options**, you can:
+    - Choose the format of timestamp fields in your logs (`RFC3339`(default),`Unix`, or `UnixNano`).
+    - Select a [sampling rate](/logs/get-started/api-configuration/#sampling-rate) for your logs or push a randomly-sampled percentage of logs.
+    - Enable redaction for `CVE-2021-44228`. This option will replace every occurrence of `${` with `x{`.
+
+10. Select **Submit** once you are done configuring your logpush job.
 
 ## Manage via API
 
 To set up a Datadog Logpush job:
 
-1.  Create a job with the appropriate endpoint URL and authentication parameters.
-2.  Enable the job to begin pushing logs.
+1. Create a job with the appropriate endpoint URL and authentication parameters.
+2. Enable the job to begin pushing logs.
 
 {{<Aside type="note" header="Note">}}
 
@@ -82,20 +78,20 @@ To create a job, make a `POST` request to the Logpush jobs endpoint with the fol
 
   {{<tabs labels="V1 | V2">}}
   {{<tab label="v1" no-code="true">}}
- 
+
 `https://http-intake.logs.datadoghq.com/v1/input`
- 
+
   {{</tab>}}
   {{<tab label="v2" no-code="true">}}
- 
+
 `https://http-intake.logs.datadoghq.com/api/v2/logs`
- 
+
   {{</tab>}}
   {{</tabs>}}
 
   - `<DATADOG_API_KEY>`: The Datadog API token can be retrieved by following [these steps](https://docs.datadoghq.com/account_management/api-app-keys/#add-an-api-key-or-client-token). For example, `20e6d94e8c57924ad1be3c29bcaee0197d`.
   - `ddsource`: Set to `cloudflare`.
-  - `service`, **host**, **ddtags**: Optional parameters allowed by Datadog.
+  - `service`, `host`, `ddtags`: Optional parameters allowed by Datadog.
 
 ```bash
 "datadog://<DATADOG_ENDPOINT_URL>?header_DD-API-KEY=<DATADOG_API_KEY>&ddsource=cloudflare&service=<SERVICE>&host=<HOST>&ddtags=<TAGS>"
@@ -173,5 +169,5 @@ The Datadog destination is exclusive to new jobs and might not be backward compa
 {{</Aside>}}
 
 {{<Aside type="note" header="Note">}}
-To analyze and visualize Cloudflare metrics using the Cloudflare Integration tile for Datadog, follow the steps in the [Datadog Analytics integration page](/fundamentals/data-products/analytics-integrations/datadog/).
+To analyze and visualize Cloudflare metrics using the Cloudflare Integration tile for Datadog, follow the steps in the [Datadog Analytics integration page](/analytics/analytics-integrations/datadog/).
 {{</Aside>}}

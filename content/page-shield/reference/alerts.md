@@ -1,47 +1,29 @@
 ---
 title: Alerts
 pcx_content_type: reference
-weight: 2
+weight: 3
 meta:
   title: Page Shield alerts
 ---
 
 # Page Shield alerts
 
-You can configure alerts for scripts detected in your domain. Refer to [Configure Page Shield alerts](/page-shield/use-dashboard/configure-alerts/) for instructions.
+You can configure alerts for resources detected in your domain. Refer to [Configure Page Shield alerts](/page-shield/detection/configure-alerts/) for instructions.
 
-## New script alerts
+## New resource alerts
 
-{{<Aside type="note">}}
-
-Available for Cloudflare customers on a Business or Enterprise plan.
-
-{{</Aside>}}
-
-- **Script Monitor New Scripts Alert**: Triggered daily by any new JavaScript dependencies detected in your pages.
-- **Script Monitor New Domain Alert**: Triggered hourly by newly detected JavaScript dependencies from new host domains.
-- **Script Monitor New Script Exceeds Max URL Length Alert**: Triggered when a script's URL exceeds the maximum allowed length.
+{{<available-notifications product="Page Shield" notificationName="Page Shield New Resources Alert">}}
+{{<available-notifications product="Page Shield" notificationName="Page Shield New Domain Alert">}}
+{{<available-notifications product="Page Shield" notificationName="Page Shield New Resource Exceeds Max URL Length Alert">}}
 
 ## Code change alert
 
-{{<Aside type="note">}}
+{{<available-notifications product="Page Shield" notificationName="Page Shield New Code Change Detection Alert">}}
 
-Available as a paid add-on for Cloudflare customers on an Enterprise plan.
+## Malicious resource alerts
 
-{{</Aside>}}
+{{<available-notifications product="Page Shield" notificationName="Page Shield New Malicious Domain Alert">}}
+{{<available-notifications product="Page Shield" notificationName="Page Shield New Malicious URL Alert">}}
+{{<available-notifications product="Page Shield" notificationName="Page Shield New Malicious Script Alert">}}
 
-- **Script Monitor New Code Change Detection Alert**: Triggered daily by any changed JavaScript dependencies detected in your pages.
-
-## Malicious script alerts
-
-{{<Aside type="note">}}
-
-Available as a paid add-on for Cloudflare customers on an Enterprise plan.
-
-{{</Aside>}}
-
-- **Script Monitor New Malicious Domain Alert**: Triggered by JavaScript dependencies loaded from domains known to be malicious according to threat intelligence feeds.
-- **Script Monitor New Malicious URL Alert**: Triggered by JavaScript dependencies loaded from URLs known to be malicious according to threat intelligence feeds.
-- **Script Monitor New Malicious Script Alert**: Triggered by JavaScript code that Cloudflare's internal systems considered malicious.
-
-Malicious script alerts will only include scripts with an _Active_ status. Refer to [Script statuses](/page-shield/reference/script-statuses/) for more information.
+Malicious resource alerts will only include resources with an _Active_ status. Refer to [Script and connection statuses](/page-shield/reference/script-statuses/) for more information.

@@ -6,31 +6,33 @@ weight: 116
 
 # Instant Logs
 
-Instant Logs allows Cloudflare Enterprise customers to access a live stream of the traffic for their domain from the Cloudflare dashboard or from a command-line interface (CLI). Seeing data in real time allows you to investigate an attack, troubleshoot, debug or test out changes made to your network. Instant Logs is lightweight, simple to use and does not require any additional setup.
+Instant Logs allows Cloudflare customers to access a live stream of the traffic for their domain from the Cloudflare dashboard or from a command-line interface (CLI). Seeing data in real time allows you to investigate an attack, troubleshoot, debug or test out changes made to your network. Instant Logs is lightweight, simple to use and does not require any additional setup.
 
-## Instant Logs on the Cloudflare dashboard
+## Availability
 
-1.  Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/login).
+{{<feature-table id="analytics.instant_logs">}}
 
-2.  Select the Enterprise domain you want to use with Instant Logs.
+## Instant Logs via Cloudflare Dashboard
 
-3.  Go to **Analytics** > **Instant Logs**.
+1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/login) and select the [zone](/fundamentals/setup/accounts-and-zones/#zones) you want to use with Instant Logs.
 
-4.  Click **Start streaming**.
+2. Go to **Analytics** > **Instant Logs**.
 
-5.  Click **Add filters** to narrow down the events shown.
+3. Select **Start streaming**.
 
-The filters you can add are **ASN**, **Cache status**, **Country**, **Client IP**, **Host**, **HTTP method**, **Path**, **Status code**, **Firewall action matches**, and **Firewall rule ID matches**. If you would like to see filtering on additional criteria, leave us feedback on the form linked on the Instant Logs page.
+4. (optional) Select **Add filter** to narrow down the events to be shown.
 
-Once a filter is selected and the stream has started, only log lines that match the filter criteria will appear. Filters are not applied retroactively to logs already showing in the dash.
+Fields supported in our [HTTP requests dataset](/logs/reference/log-fields/zone/http_requests/) can be used when you add filters. Some fields with additional subscriptions required are not supported in the dashboard, you will need to use CLI instead.
 
-## Instant Logs on the CLI
+Once a filter is selected and the stream has started, only log lines that match the filter criteria will appear. Filters are not applied retroactively to logs already showing in the dashboard.
+
+## Instant Logs via CLI
 
 ### 1. Create an Instant Logs Job
 
-Create a session by sending a `POST` request to our Instant Logs job endpoint with the following parameters:
+Create a session by sending a `POST` request to the Instant Logs job endpoint with the following parameters:
 
-- **Fields** - List any field available in our [HTTP request dataset](/logs/reference/log-fields/zone/http_requests/).
+- **Fields** - List any field available in the [HTTP requests dataset](/logs/reference/log-fields/zone/http_requests/).
 
 - **Sample** - The sample parameter is the sample rate of the records set by the client: `"sample": 1` is 100% of records `"sample": 10` is 10% and so on.
 
@@ -40,35 +42,25 @@ Instant Logs has a maximum data rate supported. For high volume domains, we samp
 
 {{</Aside>}}
 
-- **Filters** - Use filters to drill down into specific events. Filters consist of three parts: key, operator and value. The keys we support are **Client ASN**, **CacheCacheStatus**, **ClientCountry**, **ClientIP**, **ClientRequestHost**, **ClientRequestMethod**, **ClientRequestPath**, **EdgeResponseStatus**, **FirewallMatchesAction**, and **FirewallMatchesRuleIDs**.
+- **Filters** - Use filters to drill down into specific events. Filters consist of three parts: key, operator and value.
 
-This is the list of the supported operators that we have available:
-
-| **Name**                 | **Op**         |
-| ------------------------ | -------------- |
-| Equals                   | `"eq"`         |
-| Not Equals               | `"neq"`        |
-| Greater Than             | `"gt"`         |
-| Greater Than or Equal to | `"geq"`        |
-| Less Than                | `"lt"`         |
-| Less Than or Equal to    | `"leq"`        |
-| Starts with              | `"startsWith"` |
-| Ends with                | `"endsWith"`   |
-| Contains                 | `"contains"`   |
-| Is in                    | `"In"`         |
+All supported operators can be found in the [Filters](/logs/reference/filters/) page.
 
 Below we have three examples of filters:
 
 ```bash
+# Filter when client IP country is not Canada:
 "filter":"{\"where\":{\"and\":[{\"key\":\"ClientCountry\",\"operator\":\"neq\",\"value\":\"ca\"}]}}"
 ```
 
 ```bash
+# Filter when the status code returned from Cloudflare is either 200 or 201:
 "filter":"{\"where\":{\"and\":[{\"key\":\"EdgeResponseStatus\",\"operator\":\"in\",\"value\":\"200,201\"}]}}"
 ```
 
 ```bash
-"filter":"{\"where\":{\"and\":[{\"key\":\"ClientRequestPath\",\"operator\":\"contains\",\"value\":\"/static\"}, {\"where\":{\"and\":[{\"key\":\"ClientRequestHost\",\"operator\":\"eq\",\"value\":\"theburritobot.com\"}]}}"
+# Filter when the request path contains "/static" and the request hostname is "example.com":
+"filter":"{\"where\":{\"and\":[{\"key\":\"ClientRequestPath\",\"operator\":\"contains\",\"value\":\"/static\"}, {\"where\":{\"and\":[{\"key\":\"ClientRequestHost\",\"operator\":\"eq\",\"value\":\"example.com\"}]}}"
 ```
 
 Example request using cURL:
@@ -88,7 +80,7 @@ curl -X POST 'https://api.cloudflare.com/client/v4/zones/${ZONE_ID}/logpush/edge
 
 Response:
 
-The response will include a new field called **destination_conf**. The value of this field is your unique WebSocket address that will receive messages from Cloudflare's edge.
+The response will include a new field called **destination_conf**. The value of this field is your unique WebSocket address that will receive messages from Cloudflare's global network.
 
 ```bash
 {
@@ -110,8 +102,8 @@ The response will include a new field called **destination_conf**. The value of 
 
 Using a CLI utility like [Websocat](https://github.com/vi/websocat), you can connect to the WebSocket and start immediately receiving logs.
 
-```bash
-websocat wss://logs.cloudflare.com/instant-logs/ws/sessions/99d471b1ca3c23cc8e30b6acec5db987
+```sh
+$ websocat wss://logs.cloudflare.com/instant-logs/ws/sessions/99d471b1ca3c23cc8e30b6acec5db987
 ```
 
 Response:
@@ -120,10 +112,10 @@ Once connected to the websocket, you will receive messages of line-delimited JSO
 
 ### Angle Grinder
 
-Now that you have a connection to Cloudflare's websocket and are receiving logs from the edge, you can start slicing and dicing the logs. A handy tool for this is [Angle Grinder](https://github.com/rcoh/angle-grinder). Angle Grinder lets you apply filtering, transformations and aggregations on stdin with first class JSON support. For example, to get the number of visitors from each country you can sum the number of events by the `ClientCountry` field.
+Now that you have a connection to Cloudflare's websocket and are receiving logs from Cloudflare's global network, you can start slicing and dicing the logs. A handy tool for this is [Angle Grinder](https://github.com/rcoh/angle-grinder). Angle Grinder lets you apply filtering, transformations and aggregations on stdin with first class JSON support. For example, to get the number of visitors from each country you can sum the number of events by the `ClientCountry` field.
 
-```bash
-websocat wss://logs.cloudflare.com/instant-logs/ws/sessions/99d471b1ca3c23cc8e30b6acec5db987 | agrind '* | json | sum(sampleInterval) by ClientCountry'
+```sh
+$ websocat wss://logs.cloudflare.com/instant-logs/ws/sessions/99d471b1ca3c23cc8e30b6acec5db987 | agrind '* | json | sum(sampleInterval) by ClientCountry'
 ```
 
 Response:
@@ -139,11 +131,11 @@ Response:
 
 ## Datasets available
 
-For the moment, HTTP requests is the only dataset available. In the future, we will expand to other datasets.
+For the moment, `HTTP requests` is the only dataset supported. In the future, we will expand to other datasets.
 
-## Exporting
+## Export
 
-You can download the table of logs that appears in your dash using the **Export** button. The data will be downloaded in JSON format.
+You can download the table of logs that appears in the dashboard, in JSON format via the **Export** button.
 
 ## Limits
 
@@ -157,4 +149,4 @@ If either of these limits are reached, the logs stream will automatically stop.
 
 ## Connect with us
 
-If you have any feature requests or notice any bugs, share your feedback directly with us by joining the [Cloudflare Developers community on Discord](https://discord.gg/cloudflaredev).
+If you have any feature requests or notice any bugs, share your feedback directly with us by joining the [Cloudflare Developers community on Discord](https://discord.cloudflare.com).
