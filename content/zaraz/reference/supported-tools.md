@@ -9,11 +9,10 @@ meta:
 
 Cloudflare Zaraz supports the following third-party tools:
 
-{{<table-wrap>}}
-
 Name                              | Category
 --------------------------------- | -----------
-Bing                              | Advertising 
+Amplitude                         | Analytics
+Bing                              | Advertising
 Branch                            | Marketing automation
 Facebook Pixel                    | Advertising
 Floodlight                        | Advertising
@@ -37,22 +36,17 @@ Segment                           | Customer Data Platform
 Snapchat                          | Advertising
 Taboola                           | Advertising
 Tatari                            | Advertising
+TikTok                            | Advertising
 Twitter Pixel                     | Advertising
 Upward                            | Recruiting
 ZipRecruiter                      | Recruiting
 
-{{</table-wrap>}}
-
 For any other tool, use the custom integrations below:
 
-{{<table-wrap>}}
-
-Name         | Category 
+Name         | Category
  ----------- | --------
 Custom HTML  | Custom
 Custom Image | Custom
 HTTP Request | Custom
-
-{{</table-wrap>}}
 
 Refer to [Add a third-party tool](/zaraz/get-started/add-tool/) to learn more about this topic.

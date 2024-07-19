@@ -1,10 +1,9 @@
 ---
 pcx_content_type: reference
 title: Consent management
-weight: 4
+weight: 6
 meta:
     title: Zaraz Consent Management platform
-layout: single
 ---
 
 # Zaraz Consent Management platform

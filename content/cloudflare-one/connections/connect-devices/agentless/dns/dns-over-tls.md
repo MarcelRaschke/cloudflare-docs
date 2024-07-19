@@ -1,7 +1,7 @@
 ---
 pcx_content_type: how-to
-title: DNS over TLS
-weight: 3
+title: DNS over TLS (DoT)
+weight: 2
 ---
 
 # Configure DNS over TLS
@@ -12,16 +12,16 @@ Cloudflare supports DoT on standard port `853` and is compliant with [RFC7858](h
 
 ## 1. Obtain your DoT hostname
 
-Each Gateway location has a unique DoT hostname. Locations and corresponding DoT hostnames have policies associated with them.
+Each Gateway DNS location has a unique DoT hostname. DNS locations and corresponding DoT hostnames have policies associated with them.
 
-1. In the [Zero Trust dashboard](https://dash.teams.cloudflare.com/), navigate to **Gateway** > **Locations**.
+1. In [Zero Trust](https://one.dash.cloudflare.com/), go to **Gateway** > **DNS Locations**.
 2. If you have more than one location set up, you will see a list of all your locations.
 3. Expand the location card for the location whose DoT hostname you'd like to retrieve.
 4. Get the **DoT hostname** for the location.
 
 In the example below, the DoT hostname is: `9y65g5srsm.cloudflare-gateway.com`.
 
-![Getting the DoT hostname for a location from the dashboard](/cloudflare-one/static/documentation/connections/get-unique-subdomain.png)
+![Getting the DoT hostname for a DNS location from the dashboard](/images/cloudflare-one/connections/get-unique-subdomain.png)
 
 Next, configure your DoT client with the DoT hostname.
 
@@ -32,7 +32,7 @@ Depending on your operating system, you can choose from a variety of standalone 
 To configure your DoT client, enter the following IP address and the DoT hostname for your location (for example, `9y65g5srsm.cloudflare-gateway.com`):
 
 ```text
-Hostname: <DoT hostname> 
+Hostname: <DoT hostname>
 IP address: 162.159.36.5
 ```
 
@@ -43,14 +43,14 @@ Alternatively, stub resolvers (e.g., Unbound) support DoT natively. An example c
 tls-cert-bundle: "/etc/ssl/cert.pem"
 # Forwarding Config
 forward-zone:
-	name: "."
-	forward-tls-upstream: yes
-	forward-addr: 172.64.36.1@853#9y65g5srsm.cloudflare-gateway.com
-	forward-addr: <IPv6 address>#<DoT hostname>
+ name: "."
+ forward-tls-upstream: yes
+ forward-addr: 172.64.36.1@853#9y65g5srsm.cloudflare-gateway.com
+ forward-addr: <IPv6 address>#<DoT hostname>
 ```
 
 {{<Aside>}}
-Each location has a unique DoT hostname and IPv6 address. Remember to substitute your location's values into the `<IPv6 address>` and `<DoT hostname>` fields.
+Each DNS location has a unique DoT hostname and IPv6 address. Remember to substitute your location's values into the `<IPv6 address>` and `<DoT hostname>` fields.
 {{</Aside>}}
 
 ## Supported TLS versions

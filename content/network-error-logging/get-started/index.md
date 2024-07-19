@@ -5,10 +5,12 @@ pcx_content_type: get-started
 
 # Get started
 
-For Enterprise users who want to use Network Error Logging, sign up for the closed beta group.
+Network Error Logging is available to users on all plan types. 
 
-1.  Log in to your [Cloudflare dashboard](https://dash.cloudflare.com/).
-2.  Click **Analytics** > **Edge Reachability**.
-3.  Under **Network Error Logging Monitoring**, click **Join the beta**.
+To enable Network Error Logging for Free and Pro zones:
 
-After you sign up, Cloudflare will add your account and domain to a list of beta users and then enable Network Error Logging. If Network Error Logging has not been activated on your account after a week, contact your account team.
+1. Log in to your [Cloudflare dashboard](https://dash.cloudflare.com/).
+2. Select **Network** and locate **Network Error Logging Monitoring**.
+3. Select the toggle to enable Network Error Logging.
+
+To enable this for Business and Enterprise, contact support or your account team.
