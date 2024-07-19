@@ -5,8 +5,8 @@ import * as navs from "./navlinks";
 
 declare global {
   interface Window {
-    // algolia; @see search.ts
-    Coveo?: any;
+    docsearch: any;
+    zaraz: any;
   }
 }
 
@@ -17,10 +17,8 @@ declare global {
   events.focus();
   events.mobile();
   events.dropdowns();
-  events.clipboardButton();
-  events.copy();
   contents.toc();
-  events.toggleSidebar();
   events.activeTab();
   events.tabs();
+  events.zarazTrackDocEvents();
 })();

@@ -1,45 +1,45 @@
 ---
 pcx_content_type: overview
 title: DNS Firewall
-weight: 9
-layout: single
+weight: 10
 ---
 
 # DNS Firewall
 
-Cloudflare DNS Firewall proxies all DNS queries to your nameservers through Cloudflare’s global edge network. This action protects upstream nameservers from DDoS attacks and reduces load by caching DNS responses.
+{{<description>}}
+Speed up and protect entire authoritative nameservers
+{{</description>}}
 
-DNS Firewall is for customers who need to speed up and protect entire authoritative nameservers, while [authoritative DNS](/dns/zone-setups/full-setup/) is for customers who need to speed up and protect individual zones.
+{{<plan type="ent-add-on">}}
 
-## How it works
+Cloudflare DNS Firewall proxies all DNS queries to your nameservers through Cloudflare’s global network. This action protects upstream nameservers from DDoS attacks and reduces load by caching DNS responses.
 
-When a DNS query goes to your nameservers:
+![Diagram showing protection provided by DNS Firewall. For more details, read further.](/images/dns/dns-firewall-overview.png)
 
-1.  Queries go to the closest Cloudflare data center to the website visitor (determined by the location of the used DNS resolver).
-2.  Cloudflare tries to return a DNS response from cache.
-3.  If the response is not available in cache, Cloudflare queries the upstream authoritative nameservers.
-4.  Cloudflare temporarily caches the response for subsequent DNS queries.
+DNS Firewall is for customers who need to speed up and protect entire authoritative nameservers. If you need to speed up and protect individual zones, see Cloudflare DNS [Zone Setups](/dns/zone-setups).
+
+---
+
+## How DNS Firewall works
+
+When a DNS query for your domain takes place:
+
+1. Queries go to the Cloudflare data center that is closest to the website visitor. This is determined by the location of the DNS resolver.
+2. Cloudflare tries to return a DNS response from cache.
+3. If the response is not available in cache, Cloudflare queries the upstream authoritative nameservers.
+4. After returning the response from the nameservers, Cloudflare temporarily caches it for subsequent DNS queries.
+
+---
 
 ## Benefits
 
-DNS Firewall provides the following benefits while allowing organizations total control over their authoritative nameservers:
+DNS Firewall provides the following benefits while allowing your organization total control over your authoritative nameservers:
 
-*   DDoS mitigation
-*   High availability
-*   Global distribution
-*   Enhanced performance
-*   Bandwidth savings
-*   DNS caching
-*   Rate limiting per data center
-*   Specify minimum and maximum TTL
-*   Block [ANY](https://datatracker.ietf.org/doc/html/rfc8482) queries
-
-## Availability
-
-DNS Firewall is only available to customers on the [Enterprise plan](https://www.cloudflare.com/plans/enterprise/).
-
-## Resources
-
-*   [Setup](/dns/dns-firewall/setup/)
-*   [Analytics](/dns/dns-firewall/analytics/)
-*   [FAQs](/dns/dns-firewall/faq/)
+* DDoS mitigation
+* High availability
+* Global distribution
+* Enhanced performance
+* Bandwidth savings
+* [Rate limiting per data center](/dns/dns-firewall/setup/#additional-options)
+* Minimum and maximum cache TTL specification
+* DNS [ANY](https://datatracker.ietf.org/doc/html/rfc8482) query type block

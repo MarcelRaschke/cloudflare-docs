@@ -2,6 +2,8 @@
 pcx_content_type: faq
 title: General
 weight: 3
+meta:
+    description: Review frequently asked questions about Cloudflare Zero Trust.
 ---
 
 [❮ Back to FAQ](/cloudflare-one/faq/)
@@ -29,3 +31,7 @@ These browsers are supported:
 - Firefox® (current release, last release)
 - Chrome® (current release, last release)
 - Safari® (current release, last release)
+
+## What data localization services are supported?
+
+Cloudflare Zero Trust can be used with the Data Localization Suite to ensure that traffic is only inspected in the regions you choose. For more information refer to [Use Zero Trust with Data Localization Suite](/data-localization/how-to/zero-trust/).
