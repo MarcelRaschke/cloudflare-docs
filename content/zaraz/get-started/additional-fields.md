@@ -15,7 +15,7 @@ If we take Universal Google Analytics as an example, a default field would be yo
 Adding an additional field to an action will attach it to this action only, and will not affect your other actions. 
 
 1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/login), and select your account and domain.
-2. Select **Zaraz** > **Tools**.
+2. Select **Zaraz** > **Tools Configuration** > **Third-party tools**.
 3. Locate the third-party tool with the action you want to add the additional field to, and select **Edit**.
 4. Select the action you wish to modify.
 5. Select **Add Field**.
@@ -31,7 +31,7 @@ Adding an additional field to the tool sets it as a default field for all of the
 
 1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/login), and select your account and domain.
 2. Select **Zaraz** > **Tools**.
-3. Locate the third-party tool where you want to add the the field, and select **Edit**.
+3. Locate the third-party tool where you want to add the field, and select **Edit**.
 4. Select **Settings** > **Add Field**.
 5. Choose the desired field from the drop-down menu, and select **Add**.
 6. Enter the variable you wish to pass to all the actions in the tool.

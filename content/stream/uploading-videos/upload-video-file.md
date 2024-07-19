@@ -59,7 +59,7 @@ The tus protocol allows you to add optional parameters [in the `Upload-Metadata`
 
 ### Supported options in "Upload-Metadata"
 
-Setting arbitrary metadata values in the `Upload-Metadata` header sets values the [meta key in Stream API](https://api.cloudflare.com/#stream-videos-properties).
+Setting arbitrary metadata values in the `Upload-Metadata` header sets values the [meta key in Stream API](/api/operations/stream-videos-list-videos).
 
 {{<definitions>}}
 
@@ -70,6 +70,10 @@ Setting arbitrary metadata values in the `Upload-Metadata` header sets values th
 - `requiresignedurls`
 
   - If this key is present, the video playback for this video will be required to use signed urls after upload.
+
+- `scheduleddeletion`
+
+  - Specifies a date and time when a video will be deleted. After a video is deleted, it is no longer viewable and no longer counts towards storage for billing. The specified date and time cannot be earlier than 30 days or later than 1096 days from the video's created timestamp.
 
 - `allowedorigins`
 
@@ -85,9 +89,11 @@ Setting arbitrary metadata values in the `Upload-Metadata` header sets values th
 
 {{</definitions>}}
 
-### Additional supported headers
+### Set creator property
 
-Setting a creator value in the `Upload-Creator` header can be used to [identify the creator](/stream/manage-video-library/creator-id/) of the video content, linking the way you identify your users or creators to videos in your Stream account.
+Setting a creator value in the `Upload-Creator` header can be used to identify the creator of the video content, linking the way you identify your users or creators to videos in your Stream account.
+
+For examples of how to set and modify the creator ID, refer to [Associate videos with creators](/stream/manage-video-library/creator-id/).
 
 ### Getting the video ID when using TUS
 
@@ -103,12 +109,12 @@ For example, a request made to `https://api.cloudflare.com/client/v4/accounts/<A
 
 You will also need to download a tus client. This tutorial will use the [tus Python client](https://github.com/tus/tus-py-client), available through pip, Python's package manager.
 
-```bash
-pip install -U tus.py
+```sh
+$ pip install -U tus.py
 ```
 
-```bash
-tus-upload --chunk-size 52428800 --header Authorization "Bearer <API_TOKEN>" <PATH_TO_VIDEO> https://api.cloudflare.com/client/v4/accounts/<ACCOUNT_ID>/stream
+```sh
+$ tus-upload --chunk-size 52428800 --header Authorization "Bearer <API_TOKEN>" <PATH_TO_VIDEO> https://api.cloudflare.com/client/v4/accounts/<ACCOUNT_ID>/stream
 ```
 
 In the beginning of the response from tus, you’ll see the endpoint for getting information about your newly uploaded video.
@@ -182,8 +188,8 @@ Please see [go-tus](https://github.com/eventials/go-tus) on GitHub for functiona
 
 1. Install tus-js-client
 
-```bash
-npm install tus-js-client
+```sh
+$ npm install tus-js-client
 ```
 
 1. Set up an index.js and configure:
@@ -207,12 +213,12 @@ var options = {
     Authorization: 'Bearer <API_TOKEN>',
   },
   chunkSize: 50 * 1024 * 1024, // Required a minimum chunk size of 5MB, here we use 50MB.
-  resume: true,
+  retryDelays: [0, 3000, 5000, 10000, 20000], // Indicates to tus-js-client the delays after which it will retry if the upload fails
   metadata: {
-    filename: 'test.mp4',
+    name: 'test.mp4',
     filetype: 'video/mp4',
-    defaulttimestamppct: 0.5,
-    watermark: '<WATERMARK_UID>',
+    // Optional if you want to include a watermark
+    // watermark: '<WATERMARK_UID>',
   },
   uploadSize: size,
   onError: function (error) {

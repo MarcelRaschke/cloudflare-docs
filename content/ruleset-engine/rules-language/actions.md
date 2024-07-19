@@ -3,7 +3,7 @@ title: Actions
 pcx_content_type: reference
 type: overview
 weight: 5
-layout: list
+layout: wide
 meta:
   title: Actions reference
 ---
@@ -16,7 +16,7 @@ The action of a rule tells Cloudflare how to handle matches for the rule [expres
 
 The table below lists the actions available in the Rules language.
 
-Some actions, like _Block_, will stop the evaluation of the remaining rules. The _Skip_ action will skip the evaluation of _some_ rules when there is a match, but the exact behavior will depend on the rule configuration.
+Some actions like _Block_, called terminating actions, will stop the evaluation of the remaining rules. The _Skip_ action will skip the evaluation of _some_ rules when there is a match, but the exact behavior will depend on the rule configuration.
 
 The available actions depend on the [phase](/ruleset-engine/about/phases/) where you are configuring the rule. Refer to each product’s documentation for details on the phase(s) supported by that product.
 
@@ -27,20 +27,20 @@ The available actions depend on the [phase](/ruleset-engine/about/phases/) where
     <tr>
       <th>Action</th>
       <th>Description</th>
-      <th>Stops rule evaluation?</th>
+      <th>Terminating action?</th>
     </tr>
   </thead>
   <tbody>
     <tr>
       <td>
-        <strong>Legacy CAPTCHA</strong><br />
+        <strong>Interactive Challenge</strong><br />
         <br />
         API value:<br />
         <code>challenge</code>
       </td>
       <td>
         <p>Useful for ensuring that the visitor accessing the site is human, not automated.</p>
-        <p>The client that made the request must pass a CAPTCHA challenge.</p>
+        <p>The client that made the request must pass an interactive challenge.</p>
         <p>If successful, Cloudflare accepts the matched request; otherwise, it is blocked.</p>
       </td>
       <td>Yes</td>
@@ -79,9 +79,7 @@ The available actions depend on the [phase](/ruleset-engine/about/phases/) where
         </p>
         <ul>
           <li>Show a non-interactive challenge page (similar to the current JS Challenge).</li>
-          <li>Present an invisible proof of work challenge to the browser.</li>
           <li>Show a custom interactive challenge (such as click a button).</li>
-          <li>Show a CAPTCHA challenge.</li>
         </ul>
       </td>
       <td>Yes</td>
@@ -157,7 +155,7 @@ The available actions depend on the [phase](/ruleset-engine/about/phases/) where
       <td>
         <p>
           Executes the rules in the ruleset specified in the rule configuration. You can specify a
-          Managed Ruleset or a custom ruleset to execute.
+          managed ruleset or a custom ruleset to execute.
         </p>
         <p>In the Cloudflare dashboard, this action is not listed in action selection dropdowns.</p>
       </td>
@@ -177,7 +175,7 @@ The available actions depend on the [phase](/ruleset-engine/about/phases/) where
         <p>Only available in:</p>
         <ul>
           <li><a href="/rules/transform/">Transform Rules</a>, in phases <code>http_request_transform</code>, <code>http_request_late_transform</code>, and <code>http_response_headers_transform</code>. In the Cloudflare dashboard, this action is not listed in action selection dropdowns. To use this action, create a Transform Rule.</li>
-          <li>WAF custom rules checking for <a href="/waf/exposed-credentials-check/">exposed credentials</a>, in the <code>http_request_firewall_custom</code> phase at the account level. In the Cloudflare dashboard, this action is called <em>Exposed-Credential-Check Header</em>.</li>
+          <li>WAF custom rules checking for <a href="/waf/managed-rules/check-for-exposed-credentials/">exposed credentials</a>, in the <code>http_request_firewall_custom</code> phase at the account level. In the Cloudflare dashboard, this action is called <em>Exposed-Credential-Check Header</em>.</li>
         </ul>
       </td>
       <td>No</td>
@@ -194,13 +192,33 @@ The available actions depend on the [phase](/ruleset-engine/about/phases/) where
           Navigates the user from a source URL to a target URL, according to the rule configuration, by replying with an HTTP redirect.
         </p>
         <p>
-          Only available for <a href="/rules/url-forwarding/bulk-redirects/">Bulk Redirects</a> and <a href="/rules/url-forwarding/dynamic-redirects/">Dynamic Redirects</a>.
+          Only available for <a href="/rules/url-forwarding/single-redirects/">Single Redirects</a> and <a href="/rules/url-forwarding/bulk-redirects/">Bulk Redirects</a>.
         </p>
         <p>
-          In the Cloudflare dashboard, this action is not listed in action selection dropdowns. To use this action, create a Bulk Redirect Rule or a Dynamic Redirect Rule.
+          In the Cloudflare dashboard, this action is not listed in action selection dropdowns. To use this action, create a redirect rule or a bulk redirect rule.
         </p>
       </td>
       <td>Yes</td>
+    </tr>
+    <tr>
+      <td>
+        <strong>Route</strong><br />
+        <br />
+        API value:<br />
+        <code>route</code>
+      </td>
+      <td>
+        <p>
+          Adjusts the <code>Host</code> header, Server Name Indication (SNI), resolved hostname, and/or resolved destination port of incoming requests.
+        </p>
+        <p>
+          Only available for <a href="/rules/origin-rules/">Origin Rules</a>, in the <code>http_request_origin</code> phase.
+        </p>
+        <p>
+          In the Cloudflare dashboard, this action is not listed in action selection dropdowns. To use this action, create an origin rule.
+        </p>
+      </td>
+      <td>No</td>
     </tr>
     <tr>
       <td>
@@ -222,11 +240,51 @@ The available actions depend on the [phase](/ruleset-engine/about/phases/) where
       </td>
       <td>No</td>
     </tr>
+    <tr>
+      <td>
+        <strong>Compress Response</strong><br />
+        <br />
+        API value:<br />
+        <code>compress_response</code>
+      </td>
+      <td>
+        <p>
+          Defines compression settings for delivering responses to website visitors.
+        </p>
+        <p>
+          Only available for <a href="/rules/compression-rules/">Compression Rules</a>, in the <code>http_response_compression</code> phase.
+        </p>
+        <p>
+          In the Cloudflare dashboard, this action is not listed in action selection dropdowns. To use this action, <a href="/rules/compression-rules/create-dashboard/">create a compression rule</a>.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
+        <tr>
+      <td>
+        <strong>Set Cache Settings</strong><br />
+        <br />
+        API value:<br />
+        <code>set_cache_settings</code>
+      </td>
+      <td>
+        <p>
+          Cache Rules allows you to customize cache settings on Cloudflare.
+        </p>
+        <p>
+          Only available for <a href="/rules/compression-rules/">Cache Rules</a>, in the <code>http_request_cache_settings</code> phase.
+        </p>
+        <p>
+          In the Cloudflare dashboard, this action is not listed in action selection dropdowns. To use this action, <a href="/cache/how-to/cache-rules/create-dashboard/">create a cache rule</a>.
+        </p>
+      </td>
+      <td>No</td>
+    </tr>
   </tbody>
 </table>
 
 {{</table-wrap>}}
 
 {{<Aside type="note">}}
-Cloudflare Firewall Rules, a security feature which is not based on the Ruleset Engine, supports a different set of actions, including the _Allow_ and _Bypass_ actions. Refer to [Firewall rules actions](/firewall/cf-firewall-rules/actions/) for more information.
+Cloudflare Firewall Rules, now deprecated, supports a different set of actions, including the _Allow_ and _Bypass_ actions. Refer to [Firewall rules actions](/firewall/cf-firewall-rules/actions/) for more information.
 {{</Aside>}}

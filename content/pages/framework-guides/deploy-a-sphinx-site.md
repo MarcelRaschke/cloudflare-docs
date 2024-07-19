@@ -1,9 +1,9 @@
 ---
 pcx_content_type: how-to
-title: Deploy a Sphinx site
+title: Sphinx
 ---
 
-# Deploy a Sphinx site
+# Sphinx
 
 [Sphinx](https://www.sphinx-doc.org/) is a tool that makes it easy to create documentation and was originally made for the publication of Python documentation. It is well known for its simplicity and ease of use.
 
@@ -76,7 +76,7 @@ Use the following command:
 
 You should see the following output:
 
-```shell
+```bash
 Creating a virtualenv for this project...
 Pipfile: /home/ubuntu/my-wonderful-new-sphinx-project/Pipfile
 Using /usr/bin/python3.7m (3.7.11) to create virtualenv...
@@ -110,7 +110,7 @@ From your terminal, run the following command to install Sphinx:
 
 You should see output similar to the following:
 
-```shell
+```bash
 Installing sphinx...
 Adding sphinx to Pipfile's [packages]...
 ✔ Installation Succeeded
@@ -129,7 +129,7 @@ Alternatively, run a command inside the virtualenv with pipenv run.
 
 This will install Sphinx into a new virtual environment managed by Pipenv. You should see a directory structure like this:
 
-```shell
+```bash
 my-wonderful-new-sphinx-project
 |--Pipfile
 |--Pipfile.lock
@@ -163,7 +163,7 @@ $ Project language [en]: <You can accept en here or provide a regional language 
 
 This will create four new files in your active directory, `source/conf.py`, `index.rst`, `Makefile` and `make.bat`:
 
-```shell
+```bash
 my-wonderful-new-sphinx-project
 |--Pipfile
 |--Pipfile.lock
@@ -181,6 +181,9 @@ You now have everything you need to start deploying your site to Cloudflare Page
 {{<render file="_tutorials-before-you-start.md">}}
 
 ## Creating a GitHub repository
+
+<!-- TODO: check, do we need to specify all the various ssh + configs here?
+     (if not this should use the _create-github-repository partial instead) -->
 
 In a separate terminal window that is not within the pipenv shell session, verify that SSH key-based authentication is working:
 
@@ -209,9 +212,13 @@ $ git branch -M main
 $ git push -u origin main
 ```
 
-## Deploying with Cloudflare Pages
+## Deploy with Cloudflare Pages
 
-Deploy your site to Pages by logging in to the [Cloudflare dashboard](https://dash.cloudflare.com/) > **Account Home** > **Pages** and selecting **Create a project**. Select the new GitHub repository that you created and, in the **Set up builds and deployments** section, provide the following information:
+To deploy your site to Pages:
+
+1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/) and select your account.
+2. In Account Home, select **Workers & Pages** > **Create application** > **Pages** > **Connect to Git**.
+3. Select the new GitHub repository that you created and, in the **Set up builds and deployments** section, provide the following information:
 
 <div>
 
@@ -245,8 +252,6 @@ For the complete guide to deploying your first site to Cloudflare Pages, refer t
 
 After deploying your site, you will receive a unique subdomain for your project on `*.pages.dev`. Every time you commit new code to your Sphinx site, Cloudflare Pages will automatically rebuild your project and deploy it.
 
-You will also get access to [preview deployments](/pages/platform/preview-deployments/) on new pull requests, so you can preview how changes look to your site before deploying them to production.
+You will also get access to [preview deployments](/pages/configuration/preview-deployments/) on new pull requests, so you can preview how changes look to your site before deploying them to production.
 
-## Learn more
-
-By completing this guide, you have successfully deployed your Sphinx site on Cloudflare Pages. To get started with other frameworks, [refer to the list of Framework guides](/pages/framework-guides/).
+{{<render file="/_framework-guides/_learn-more.md" withParameters="Sphinx">}}

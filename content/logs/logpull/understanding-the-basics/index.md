@@ -2,10 +2,9 @@
 pcx_content_type: reference
 title: Understanding the basics
 weight: 12
-layout: single
 ---
 
-# Understanding the basics
+# Understand the basics
 
 ## Access pattern
 
@@ -37,7 +36,7 @@ To turn the resulting log data into a JSON array with one array element per log 
 
 The following is a sample log with default fields:
 
-```bash
+```json
 {
     "ClientIP": "89.163.242.206",
     "ClientRequestHost": "www.theburritobot.com",
@@ -53,4 +52,4 @@ The following is a sample log with default fields:
 
 ## Data retention period
 
-You can query for logs starting from 1 minute in the past (relative to the actual time that you make the query) and go back at least 3 days and up to 7 days.
+You can query for logs starting from 1 minute in the past (relative to the actual time that you make the query) and go back at least 3 days and up to 7 days. For longer durations, we recommend using [Logpush](/logs/about/).

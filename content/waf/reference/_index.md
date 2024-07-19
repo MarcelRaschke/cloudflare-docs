@@ -1,8 +1,7 @@
 ---
 title: Reference
 pcx_content_type: navigation
-weight: 11
-layout: single
+weight: 15
 ---
 
 # Reference

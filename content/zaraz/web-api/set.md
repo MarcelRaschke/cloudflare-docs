@@ -1,7 +1,7 @@
 ---
 pcx_content_type: reference
 title: Set
-weight: 5
+weight: 2
 meta:
   title: zaraz.set
 ---
@@ -40,7 +40,7 @@ zaraz.set('product_name', 't-shirt', {scope: 'page'})
 
 Keys that are sent using `zaraz.set()` can be used inside tool actions exactly like keys in the `eventProperties` of `zaraz.track()`. So, the above `product` key is accessible through the Cloudflare dashboard with the variable _Track Property name:_, and setting its name as `product_name`. Zaraz will then replace it with `t-shirt`.
 
-![Example of how to create a variable with the Set method, tracking t-shirts](/zaraz/static/set.png)
+![Example of how to create a variable with the Set method, tracking t-shirts](/images/zaraz/set.png)
 
 The `[options]` argument is an optional object and can include a `scope` property that has a string value. This property determines the lifetime of this key, meaning for how long Zaraz should keep attaching it to `zaraz.track()` calls. Allowed values are:
 
@@ -48,4 +48,10 @@ The `[options]` argument is an optional object and can include a `scope` propert
 * `session`: To make the key last the whole session.
 * `persist`: To save the key across sessions. This is the default mode and uses `localStorage` to save the value.
 
-In the previous example, `{scope: 'page'}` makes the `product_name` property available to all `zaraz.track()` calls in the current page, but will not affect calls after visitors navigate to other pages. Refer to [Properties reference](/zaraz/reference/properties-reference/) for more details.
+In the previous example, `{scope: 'page'}` makes the `product_name` property available to all `zaraz.track()` calls in the current page, but will not affect calls after visitors navigate to other pages.
+
+To unset a variable, set it to `undefined`. The variable will then be removed from all scopes it was included in, and will not be automatically sent with future `zaraz.track` calls. For example:
+
+```js
+zaraz.set('product_name', undefined)
+```

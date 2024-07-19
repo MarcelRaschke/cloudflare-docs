@@ -1,6 +1,7 @@
 ---
 title: Download videos
 weight: 6
+pcx_content_type: how-to
 ---
 
 # Download videos
@@ -28,7 +29,7 @@ curl -X POST \
 https://api.cloudflare.com/client/v4/accounts/<ACCOUNT_ID>/stream/<VIDEO_UID>/downloads
 ```
 
-```bash
+```json
 ---
 header: Response
 ---
@@ -59,7 +60,7 @@ curl -X GET \
 https://api.cloudflare.com/client/v4/accounts/<ACCOUNT_ID>/stream/<VIDEO_UID>/downloads
 ```
 
-```bash
+```json
 ---
 header: Response
 ---
@@ -87,12 +88,14 @@ In the example below, adding `?filename=MY_VIDEO.mp4` to the URL will change the
 https://customer-<CODE>.cloudflarestream.com/<VIDEO_UID>/downloads/default.mp4?filename=MY_VIDEO.mp4
 `
 
+The `filename` can be a maximum of 120 characters long and composed of `abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_` characters. The extension (.mp4) is appended automatically.
+
 ## Retrieve downloads
 
 The generated MP4 download files can be retrieved via the link in the download API response.
 
-```bash
-curl -L https://customer-<CODE>.cloudflarestream.com/<VIDEO_UID>/downloads/default.mp4 > download.mp4
+```sh
+$ curl -L https://customer-<CODE>.cloudflarestream.com/<VIDEO_UID>/downloads/default.mp4 > download.mp4
 ```
 
 ## Secure video downloads
