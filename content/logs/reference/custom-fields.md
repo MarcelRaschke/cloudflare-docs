@@ -8,6 +8,10 @@ weight: 43
 
 You can configure custom fields — selected from the list of HTTP request headers, HTTP response headers, and cookies — to include in Logpush log entries of a zone. Once configured, these custom fields will be enabled for all the Logpush jobs in the zone that use the HTTP requests dataset and include the request headers, response headers, or cookie fields.
 
+Custom fields can be enabled via API or the Cloudflare dashboard.
+
+## Enable custom rules via API
+
 Use the [Rulesets API](/ruleset-engine/rulesets-api/) to create a rule that configures custom fields. For more information on concepts like phases, rulesets, and rules, as well as the available API operations, refer to the [Ruleset Engine](/ruleset-engine/) documentation.
 
 To configure custom fields:
@@ -15,7 +19,7 @@ To configure custom fields:
 1. Create a rule to configure the list of custom fields.
 2. Include the `Cookies`, `RequestHeaders`, and/or `ResponseHeaders` fields in your Logpush job.
 
-## 1. Create a rule to configure the list of custom fields
+### 1. Create a rule to configure the list of custom fields
 
 Create a rule configuring the list of custom fields in the `http_log_custom_fields` phase at the zone level. Set the rule action to `log_custom_field` and the rule expression to `true`.
 
@@ -162,7 +166,7 @@ Perform the following steps to create the rule:
     }
     ```
 
-## 2. Include the custom fields in your Logpush job
+### 2. Include the custom fields in your Logpush job
 
 Next, include `Cookies`, `RequestHeaders`, and/or `ResponseHeaders`, depending on your custom field configuration, in the list of fields of the `logpull_options` job parameter when creating or updating a job. The logs will contain the configured custom fields and their values in the request/response.
 
@@ -171,7 +175,7 @@ For example, consider the following request that creates a job that includes cus
 ```json
 curl -X POST \
 "https://api.cloudflare.com/client/v4/zones/<ZONE_ID>/logpush/jobs" \
--H "X-Auth-Email: <EMAIL>" \ 
+-H "X-Auth-Email: <EMAIL>" \
 -H "X-Auth-Key: <API_KEY>" \
 -d '{
   "name":"<DOMAIN_NAME>",
@@ -188,7 +192,18 @@ If you are a Cloudflare Access user, as of March 2022 you have to manually add t
 
 {{</Aside>}}
 
-## Final remarks
+## Enable custom fields via dashboard
+
+1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com) and select the domain you want to use.
+2. Go to **Analytics & Logs** > **Logpush**.
+3. In the **Custom Fields** section, select **Edit Custom Fields**.
+4. Select **Set new Custom Field**.
+5. From the **Field Type** dropdown, select _Request Header_, _Response Header_ or _Cookies_ and type the **Field Name**.
+6. When you are done, select **Save**.
+
+## Limitations
 
 * You can configure up to 40 custom fields across all field types (HTTP request headers, HTTP response headers, and cookies) per zone.
-* The maximum length of custom field data is 8 KB. Any data over this limit will be truncated.
+* The maximum length of custom field data for HTTP request headers, Cookies, and HTTP response headers combined is 8 KB. Any data over this limit will be truncated.
+* For headers which may be included multiple times (for example, the `set-cookie` response header), a custom field will only log the first instance of the header. Subsequent headers of the same type will be ignored.
+* Currently, Cloudflare only logs original request/response headers. Headers that were modified earlier in the request lifecycle with [Transform Rules](/rules/transform/) will not be logged.

@@ -10,11 +10,17 @@ meta:
 
 This tutorial shows you how to get started with Terraform. The tutorial uses an example scenario where you have a web server for your domain, accessible on `203.0.113.10`, and you just signed up your domain (`example.com`) on Cloudflare to manage everything in Terraform.
 
-Before you begin, ensure you [installed Terraform](/terraform/installing/). You will also need to [create an API Token](/api/get-started/create-token/) with permissions to edit resources for this tutorial.
+Before you begin, ensure you have [installed Terraform](/terraform/installing/). You will also need to [create an API Token](/fundamentals/api/get-started/create-token/) with permissions to edit resources for this tutorial.
 
 ## 1. Define your first Terraform config file
 
-Create an initial Terraform config file. Terraform will process any files with a `.tf` extension. As the configuration becomes more complex, you will want to split the config into separate files and modules. For now, proceed with a single file.
+Create an initial Terraform config file, filling in your own values for the [API token](/fundamentals/api/get-started/create-token/), [zone ID](/fundamentals/setup/find-account-and-zone-ids/), [account ID](/fundamentals/setup/find-account-and-zone-ids/), and [domain](/fundamentals/setup/manage-domains/add-site/).
+
+Terraform will process any files with a `.tf` extension. As the configuration becomes more complex, you will want to split the config into separate files and modules. For now, proceed with a single file.
+
+{{<Aside type="warning">}}
+To prevent accidentally exposing your Cloudflare credentials, do not save this file in your version control system. The [next tutorial](/terraform/tutorial/track-history/) will cover best practices for passing in your API token.
+{{</Aside>}}
 
 ```bash
 $ cat > cloudflare.tf <<'EOF'
@@ -22,21 +28,25 @@ terraform {
   required_providers {
     cloudflare = {
       source = "cloudflare/cloudflare"
-      version = "~> 3.0"
+      version = "~> 4"
     }
   }
 }
 
 provider "cloudflare" {
-  api_token = "your-api-token"
+  api_token = "<YOUR_API_TOKEN>"
 }
 
 variable "zone_id" {
-  default = "e097e1136dc79bc1149e32a8a6bde5ef"
+  default = "<YOUR_ZONE_ID>"
+}
+
+variable "account_id" {
+  default = "<YOUR_ACCOUNT_ID>"
 }
 
 variable "domain" {
-  default = "example.com"
+  default = "<YOUR_DOMAIN>"
 }
 
 resource "cloudflare_record" "www" {
@@ -98,45 +108,39 @@ After installing the Cloudflare provider, review the proposed changes to your Cl
 
 ```sh
 $ terraform plan
-Refreshing Terraform state in-memory prior to plan...
-The refreshed state will be used to calculate this plan, but will not be
-persisted to local or remote state storage.
 
-
-------------------------------------------------------------------------
-
-An execution plan has been generated and is shown below.
+Terraform used the selected providers to generate the following execution plan.
 Resource actions are indicated with the following symbols:
   + create
 
 Terraform will perform the following actions:
 
-  + cloudflare_record.www
-      id:          <computed>
-      created_on:  <computed>
-      domain:      <computed>
-      hostname:    <computed>
-      metadata.%:  <computed>
-      modified_on: <computed>
-      name:        "www"
-      proxiable:   <computed>
-      proxied:     "true"
-      ttl:         <computed>
-      type:        "A"
-      value:       "203.0.113.10"
-      zone_id:     "e097e1136dc79bc1149e32a8a6bde5ef"
-
+  # cloudflare_record.www will be created
+  + resource "cloudflare_record" "www" {
+      + allow_overwrite = false
+      + created_on      = (known after apply)
+      + hostname        = (known after apply)
+      + id              = (known after apply)
+      + metadata        = (known after apply)
+      + modified_on     = (known after apply)
+      + name            = "www"
+      + proxiable       = (known after apply)
+      + proxied         = true
+      + ttl             = (known after apply)
+      + type            = "A"
+      + value           = "203.0.113.10"
+      + zone_id         = "e2e6491340be87a3726f91fc4148b126"
+    }
 
 Plan: 1 to add, 0 to change, 0 to destroy.
 
 ------------------------------------------------------------------------
 
-Note: You didn’t specify an "-out" parameter to save this plan, so Terraform
-can’t guarantee that exactly these actions will be performed if
-"terraform apply" is subsequently run.
+Note: You didn't use the -out option to save this plan, so Terraform can't
+guarantee to take exactly these actions if you run "terraform apply" now.
 ```
 
-As displayed in the execution plan, Terraform will create a new DNS record. The output shows the values that you explicitly specified, such as the value of the `A` record (`203.0.113.10`). Values shown as `<computed>` are derived based on other API calls (for example, looking up the `metadata`), or the values are returned after the object is created.
+As displayed in the execution plan, Terraform will create a new DNS record. The output shows the values that you explicitly specified, such as the value of the `A` record (`203.0.113.10`). Values shown as `(known after apply)` are derived based on other API calls (for example, looking up the `metadata`), or the values are returned after the object is created.
 
 ## 4. Apply your changes
 
@@ -146,50 +150,67 @@ You can use `--auto-approve` on the command line for a briefer output. Without t
 
 ```sh
 $ terraform apply --auto-approve
-cloudflare_record.www: Creating...
-  created_on:  "" => "<computed>"
-  domain:      "" => "example.com"
-  hostname:    "" => "<computed>"
-  metadata.%:  "" => "<computed>"
-  modified_on: "" => "<computed>"
-  name:        "" => "www"
-  proxiable:   "" => "<computed>"
-  proxied:     "" => "true"
-  ttl:         "" => "<computed>"
-  type:        "" => "A"
-  value:       "" => "203.0.113.10"
-  zone_id:     "" => "<computed>"
-cloudflare_record.www: Creation complete after 1s (ID: c38d3103767284e7cd14d5dad3ab8668)
+
+Terraform used the selected providers to generate the following execution plan.
+Resource actions are indicated with the following symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # cloudflare_record.www will be created
+  + resource "cloudflare_record" "www" {
+      + allow_overwrite = false
+      + created_on      = (known after apply)
+      + hostname        = (known after apply)
+      + id              = (known after apply)
+      + metadata        = (known after apply)
+      + modified_on     = (known after apply)
+      + name            = "www"
+      + proxiable       = (known after apply)
+      + proxied         = true
+      + ttl             = (known after apply)
+      + type            = "A"
+      + value           = "203.0.113.10"
+      + zone_id         = "e2e6491340be87a3726f91fc4148b126"
+    }
+
+Plan: 1 to add, 0 to change, 0 to destroy.
+cloudflare_record.www: Creation complete after 1s [id=c38d3103767284e7cd14d5dad3ab8668]
 
 Apply complete! Resources: 1 added, 0 changed, 0 destroyed.
 ```
 
 ## 5. Verify the results
 
-Log in to the [Cloudflare dashboard](https://dash.cloudflare.com) and navigate to **DNS**. The record created by Terraform appears in the records list.
+Log in to the [Cloudflare dashboard](https://dash.cloudflare.com) and go to **DNS** > **Records**. The record created by Terraform appears in the records list.
 
 To see the full results returned from the API call, including the default values that you did not specify but let Terraform compute, run `terraform show`.
 
 ```sh
 $ terraform show
-cloudflare_record.www:
-  id = c38d3103767284e7cd14d5dad3ab8668
-  created_on = 2018-04-08T00:37:33.76321Z
-  data.% = 0
-  domain = example.com
-  hostname = www.example.com
-  metadata.% = 2
-  metadata.auto_added = false
-  metadata.managed_by_apps = false
-  modified_on = 2018-04-08T00:37:33.76321Z
-  name = www
-  priority = 0
-  proxiable = true
-  proxied = true
-  ttl = 1
-  type = A
-  value = 203.0.113.10
-  zone_id = e097e1136dc79bc1149e32a8a6bde5ef
+# cloudflare_record.www:
+resource "cloudflare_record" "www" {
+    id          = "c38d3103767284e7cd14d5dad3ab8668"
+    created_on  = "2023-04-08T00:37:33.76321Z"
+    data        = []
+    domain      = "example.com"
+    hostname    = "www.example.com"
+    metadata    = [
+        {
+            auto_added      = false
+            managed_by_apps = false
+        }
+    ]
+    modified_on = "2023-04-08T00:37:33.76321Z"
+    name        = "www"
+    priority    = 0
+    proxiable   = true
+    proxied     = true
+    ttl         = 1
+    type        = "A"
+    value       = "203.0.113.10"
+    zone_id     = "e2e6491340be87a3726f91fc4148b126"
+}
 ```
 
 ```sh

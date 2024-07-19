@@ -1,68 +1,60 @@
 ---
 pcx_content_type: how-to
 title: Generic SAML 2.0
-weight: 1
+weight: 2
 ---
 
 # Generic SAML 2.0
 
-Cloudflare Zero Trust integrates with any identity provider that supports SAML 2.0. If your identity provider is not listed in the integration list of login methods on the Zero Trust Dashboard, it can be configured using SAML 2.0 (or OpenID if OIDC based). Generic SAML can also be used if you would like to pass additional SAML headers or claims for an IdP in the integration list.
+Cloudflare Zero Trust integrates with any identity provider that supports SAML 2.0. If your identity provider is not listed in the integration list of login methods in Zero Trust, it can be configured using SAML 2.0 (or OpenID if OIDC based). Generic SAML can also be used if you would like to pass additional SAML headers or claims for an IdP in the integration list.
 
-Most identity providers allow users to create an **application**. In this context, an application is a set of parameters that the identity provider will then pass on to Cloudflare to establish an integration.
+## Prerequisites
 
 Minimum requirements for identity providers:
 
-- The IdP must conform to SAML 2.0
-- The IdP must provide: A Single Sign on URL, an Entity ID, and a signing certificate
+- The IdP must conform to SAML 2.0.
+- The IdP must provide a **Single sign-on URL**, an **Entity ID or Issuer URL**, and a **Signing certificate**.
+- The IdP must include the signing public key in the SAML response.
 
-Depending on the identity provider you would like to integrate, the following steps may happen in a different order.
+## 1. Create an application in your identity provider
 
-## Create an application in your identity provider
+Most identity providers allow users to create an **Application**. In this context, an application is a set of parameters that the identity provider will then pass on to Cloudflare to establish an integration.
 
 The typical setup requirements are:
 
-1.  Create a new integration in the identity provider with the type set as **SAML**.
-1.  Set the Entity/Issuer ID to: `https://<your-team-name>.cloudflareaccess.com/cdn-cgi/access/callback`, where `<your-team-name>` should be your Cloudflare Zero Trust [team name](/cloudflare-one/glossary/#team-name).
-1.  Set the Single Sign On URL (or similarly named) to: `https://<your-team-name>.cloudflareaccess.com/cdn-cgi/access/callback`, where `<your-team-name>` should be your Cloudflare Zero Trust [team name](/cloudflare-one/glossary/#team-name).
-1.  Set the Name ID/Email format to `emailAddress`.
-1.  \[Optional] Set the signature policy to _Always Sign_.
-1.  \[Optional] If your identity provider supports metadata file configuration, use the endpoint: `https://<your-team-name>.cloudflareaccess.com/cdn-cgi/access/saml-metadata` to download and generate an XML file. Upload this XML file to the identity provider.
-
-## Add a SAML identity provider to the Zero Trust Dashboard
-
-1.  On the Zero Trust Dashboard, navigate to **Settings** > **Authentication**.
-1.  In the Login methods card, click **Add new** and select _SAML_.
-1.  Choose a descriptive name for your identity provider.
-1.  Enter the Single Sign on URL, IdP Entity ID or Issuer URL, and Signing certificate.
-1.  If you do not wish to enter any of the [additional SAML configurations](#additional-saml-configurations), click **Save**.
-
-## Download SP metadata (optional)
-
-Some IdPs allow administrators to upload metadata files from their SP (service provider).
-
-To get your Cloudflare metadata file:
-
-1.  Download your unique SAML metadata file at the following URL:
-
+1. Create a new integration in the identity provider with the type set as **SAML**.
+2. Set both the **Entity/Issuer ID** and the **Single sign-on URL** to:
     ```txt
-    https://<your-team-name>.cloudflareaccess.com/cdn-cgi/access/saml-metadata
+    https://<your-team-name>.cloudflareaccess.com/cdn-cgi/access/callback
     ```
+    You can find your team name in Zero Trust under **Settings** > **Custom Pages**.
+3. Set the **Name ID/Email format** to `emailAddress`.
+4. (Optional) Set the signature policy to _Always Sign_.
 
-    Replace `<your-team-name>` with your [team name](/cloudflare-one/glossary/#team-name).
+### (Optional) Upload SAML metadata
 
-    The link returns a web page with your SAML SP data in XML format.
+If your identity provider supports metadata file configuration, use the endpoint: `https://<your-team-name>.cloudflareaccess.com/cdn-cgi/access/saml-metadata` to download and generate an XML file. Upload this XML file to the identity provider.
 
-2.  Save the file as an XML document.
+## 2. Add a SAML identity provider to Zero Trust
 
-You can now upload the XML document to your identity provider account.
+1. In [Zero Trust](https://one.dash.cloudflare.com), go to **Settings** > **Authentication** > **Login methods**.
+2. Select **Add new** and select **SAML**.
+3. Choose a descriptive name for your identity provider.
+4. Enter the **Single Sign on URL**, **IdP Entity ID or Issuer URL**, and **Signing certificate** obtained from your identity provider.
+5. (Optional) Enter [optional configurations](#optional-configurations).
+6. Select **Save**.
 
-## Additional SAML configurations
+## 3. Test the connection
 
-SAML integrations allow users to include additional headers or claims that can be passed to applications.
+You can now [test the IdP integration](/cloudflare-one/identity/idp-integration/#test-idps-in-zero-trust). A success response should return the configured SAML attributes.
+
+## Optional configurations
+
+SAML integrations allow you to pass additional headers or claims to applications.
 
 ### Sign SAML authentication request
 
-This optional configuration signs the Access JWT with the Cloudflare Access public key to ensure that the JWT is coming from a legitimate source. The Cloudflare public key can be obtained at `https://<your-team-name>.cloudflareaccess.com/cdn-cgi/access/certs`.
+This optional configuration signs the [Access JWT](/cloudflare-one/identity/authorization-cookie/) with the Cloudflare Access public key to ensure that the JWT is coming from a legitimate source. The Cloudflare public key can be obtained at `https://<your-team-name>.cloudflareaccess.com/cdn-cgi/access/certs`.
 
 ### Email attribute name
 
@@ -70,25 +62,35 @@ Many [Access policies](/cloudflare-one/policies/access/) depend on a user’s em
 
 Example in Okta:
 
-![Example SAML dialog in Okta interface](/cloudflare-one/static/documentation/identity/saml-assertion.png)
-![Example Okta SAML dialog in text editor](/cloudflare-one/static/documentation/identity/saml-attributes.png)
+![Preview the SAML assertion from the Okta dashboard](/images/cloudflare-one/identity/saml-assertion.png)
+![Determine the email attribute name from the SAML assertion](/images/cloudflare-one/identity/saml-attributes.png)
 
-### SAML attributes
+### SAML headers and attributes
 
-SAML attributes can be added to the Access JWT. These can then be consumed by self-hosted or SaaS applications connected to Access. Any SAML attribute configured in the SAML integration must also be sent from the IdP.
+Cloudflare Access supports SAML (Security Assertion Markup Language) attributes and SAML headers for all SAML IdP integrations.
+
+[**SAML attributes**](#saml-attributes) refer to specific data points or characteristics that the IdP shares about the authenticated user. These attributes often include details like email address, name, or role, and are passed along to the service provider upon successful authentication.
+
+[**SAML headers**](#saml-headers) are metadata in the SAML protocol communication which convey information about the sender, recipient, and the message itself. These headers can be leveraged to provide extra context or control over the communication.
+
+#### SAML attributes
+
+SAML attributes are added to the [Access JWT](/cloudflare-one/identity/authorization-cookie/). These attributes can then be consumed by self-hosted or SaaS applications connected to Access. Any SAML attribute configured in the SAML integration must also be sent from the IdP.
 
 Example in Okta:
 
-![Example SAML dialog in Okta for attribute statements](/cloudflare-one/static/documentation/identity/attribute-statements.png)
+![Configure Okta to send SAML attributes](/images/cloudflare-one/identity/attribute-statements.png)
 
-How to receive these Attributes in Cloudflare:
+How to receive these SAML attributes in Cloudflare:
 
-![Example SAML dialog in Cloudflare for attributes](/cloudflare-one/static/documentation/identity/attributes-cloudflare.png)
+![Configure Cloudflare to receive SAML attributes](/images/cloudflare-one/identity/attributes-cloudflare.png)
 
-### SAML header attributes
+#### SAML headers
 
-If an application only requires specific SAML attributes on sign-in, then the attributes can be passed as headers. The **Attribute Name** should be the values coming from the IdP. The **Header Name** is what will appear in the initial authorization header from Access.
+If an application specifically requires SAML attributes upon sign-in, then the attributes can be passed as headers. The **Attribute name** should be the value coming from your IdP (for example, `department`). You can assign any **Header name** to the attribute. The header name will appear in the response headers when Access makes the initial authorization request to `https://<your-team-name>.cloudflareaccess.com/cdn-cgi/access/callback`.
 
-## Testing the connection
+#### Multi-record SAML attributes
 
-Save the initial SAML configuration and click **Test**. This will prompt an error or success message. The error message will provide instructions on how to update the configuration to successfully integrate your identity provider with Cloudflare.
+Cloudflare Access extends support for multi-record SAML attributes such as groups. These attributes are parsed out and can be individually referenced in policies. This feature enables granular access control and precise user authorization in applications.
+
+Cloudflare Access does not currently support partial attribute value references.

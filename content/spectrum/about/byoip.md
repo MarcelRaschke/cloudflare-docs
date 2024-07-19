@@ -10,13 +10,19 @@ When creating a Spectrum application, Cloudflare normally assigns an arbitrary I
 
 BYOIP stands for [Bring Your Own IP](/byoip/). If you own an IP prefix you can migrate it to Cloudflare. After migration, Cloudflare broadcasts your IP prefix and traffic is routed to the global Cloudflare network. However, without configuration, Cloudflare will not know how to handle this traffic. The last step is to add Spectrum applications for all applications that you wish to protect with the IP addresses you want associated with them.
 
+{{<Aside type="warning">}}
+
+When switching from non-BYOIP to BYOIP, if you are already using a Spectrum application, you need to delete your configurations and recreate new ones.
+
+{{</Aside>}}
+
 The smallest prefixes that Cloudflare currently supports is /24 for IPv4 and /48 for IPv6.
 
 BYOIP does not come standard with Spectrum. To enable it, contact your account team.
 
 ## Assign an IP address
 
-To use an IP, it must be assigned to a Spectrum app to create the appropriate A (IPv4) or AAAA (IPv6) records. This is done by specifying one or more IP addresses when creating an application through the API. In addition, the DNS "type" field must be updated to "ADDRESS" in order to create a Spectrum app using BYOIP.
+To use an IP, it must be assigned to a Spectrum app to create the appropriate A (IPv4) or AAAA (IPv6) records. This is done by specifying one or more IP addresses when creating an application through the API. Any change to the application's properties also needs to be done via API. In addition, you must update the DNS `"type"` field to `"ADDRESS"` to create a Spectrum app using BYOIP.
 
 ```json
 {
@@ -44,29 +50,29 @@ To use an IP, it must be assigned to a Spectrum app to create the appropriate A 
 In the example below, the application routes traffic through Cloudflare’s HTTP pipeline, including WAF, Workers and CDN functionality.
 
 ```bash
-curl -X POST "https://api.cloudflare.com/client/v4/zones/ZONEID/spectrum/apps" \
-     -H "X-Auth-Email: USER_EMAIL" \
-     -H "X-Auth-Key: API_KEY" \
-     -H "Content-Type: application/json" \
-     --data '{
-      "protocol": "tcp/80",
-      "dns": {
-        "type": "ADDRESS",
-        "name": "www.example.com"
-      },
-      "origin_direct": [
-        "tcp://192.0.2.1:80"
-      ],
-      "tls": "off",
-      "traffic_type": "http",
-      "edge_ips": {
-        "type": "static",
-        "ips": [
-          "198.51.100.10",
-          "2001:DB8::1"
-        ]
-      }
-    }'
+curl "https://api.cloudflare.com/client/v4/zones/{zone_id}/spectrum/apps" \
+--header "X-Auth-Email: <EMAIL>" \
+--header "X-Auth-Key: <API_KEY>" \
+--header "Content-Type: application/json" \
+--data '{
+  "protocol": "tcp/80",
+  "dns": {
+    "type": "ADDRESS",
+    "name": "www.example.com"
+  },
+  "origin_direct": [
+    "tcp://192.0.2.1:80"
+  ],
+  "tls": "off",
+  "traffic_type": "http",
+  "edge_ips": {
+    "type": "static",
+    "ips": [
+      "198.51.100.10",
+      "2001:DB8::1"
+    ]
+  }
+}'
 ```
 
-(replace ZONEID, USER_EMAIL and API_KEY with your actual values)
+Replace `{zone_id}`, `<EMAIL>`, and `<API_KEY>` with your actual values.

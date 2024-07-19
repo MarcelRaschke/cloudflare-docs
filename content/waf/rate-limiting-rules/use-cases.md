@@ -1,14 +1,14 @@
 ---
-title: Common use cases
+title: Rule examples
 pcx_content_type: configuration
 weight: 20
 meta:
-  title: Common rate limiting use cases
+  title: Rate limiting rule examples
 ---
 
-# Common rate limiting use cases
+# Rate limiting rule examples
 
-The examples below include sample rate limiting rule configurations that address common rate limiting use cases.
+The examples below include sample rate limiting rule configurations.
 
 ## Example 1
 
@@ -33,7 +33,7 @@ The following rule performs rate limiting on incoming requests with a given base
 {{<example>}}
 
 Expression:<br />
-`(http.request.uri.path contains "/product*" and http.request.method eq "POST")`
+`(http.request.uri.path contains "/product" and http.request.method eq "POST")`
 
 Rule characteristics:
 
