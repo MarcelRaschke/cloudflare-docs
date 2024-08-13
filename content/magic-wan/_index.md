@@ -21,6 +21,8 @@ Magic WAN supports a variety of {{<glossary-tooltip term_id="on-ramp">}}on-ramps
 
 Refer to [On-ramps](/magic-wan/on-ramps/) for a full list of supported on-ramps.
 
+Learn how to [get started](/magic-wan/get-started/).
+
 ---
 
 ## Features
@@ -68,3 +70,15 @@ Cloudflare Network Interconnect (CNI) allows you to connect your network infrast
 {{<related header="Load Balancing" href="/load-balancing/" product="load-balancing">}}
 Cloudflare Load Balancing distributes traffic across your endpoints, which reduces endpoint strain and latency and improves the experience for end users.
 {{</related>}}
+
+---
+
+## More resources
+
+{{<resource-group>}}
+
+{{<resource header="Reference Architecture" href="/reference-architecture/architectures/sase/" icon="reference-architecture">}}
+Deep dive into key architecture and functionalities aspects of Cloudflare One, and learn more about Magic WAN and its structure.
+{{</resource>}}
+
+{{</resource-group>}}

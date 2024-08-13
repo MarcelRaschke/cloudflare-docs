@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: Zoom
-weight: 23
+updated: 2024-07-17
+weight: 30
 ---
 
 # Connect to Zoom through Access

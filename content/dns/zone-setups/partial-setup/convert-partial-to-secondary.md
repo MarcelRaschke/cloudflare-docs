@@ -22,7 +22,7 @@ Make sure you consider the following:
 
 ## 1. Prepare a zone file
 
-1. Export a zone file from the authoritatve DNS provider you were using with your partial (CNAME) setup.
+1. Export a zone file from the authoritative DNS provider you were using with your partial (CNAME) setup.
 2. Edit the zone file to remove any occurrences of the `cdn.cloudflare.net` suffix.
 
   * If the `CNAME` target is only appending the Cloudflare suffix to the same hostname at which it is created, replace it by the records on the Cloudflare partial zone.
@@ -82,7 +82,7 @@ Final records adjusted in the zone file:
 
 1. Use the [Import DNS Records endpoint](/api/operations/dns-records-for-a-zone-import-dns-records) with a properly [formatted zone file](/dns/manage-dns-records/how-to/import-and-export/#format-your-zone-file) to import the records into your partial zone.
 
-    Existing and already proxied records will not be overwritten by the import.
+    {{<render file="_zone-file-size-limit.md">}} Existing and already proxied records will not be overwritten by the import.
 
 2. Use the [Update DNS Settings endpoint](/api/operations/dns-settings-for-a-zone-update-dns-settings) with `secondary_overrides` set to `true`, to enable Secondary DNS Override.
 
@@ -105,15 +105,17 @@ Once the time to live (TTL) of previous `NS` records is expired and this informa
 
 ## 3. Configure the zone transfers
 
-{{<Aside type="note" header="If you are also changing your primary provider">}}
-If you are also migrating to a new primary DNS provider, import the same zone file you prepared in [Step 1](#1-prepare-a-zone-file) onto your new primary zone. Make sure there are no records that still refer `cdn.cloudflare.net`. Otherwise, HTTP traffic for these hostnames will break.
+1. Remove all references to `cdn.cloudflare.net` from your primary DNS provider. You can do this by importing the same zone file you prepared in [Step 1](#1-prepare-a-zone-file) onto your primary zone.
+
+{{<Aside type="warning">}}
+If you keep any DNS records that still refer `cdn.cloudflare.net`, HTTP traffic for the respective hostnames will break.
 {{</Aside>}}
 
-1. Enable outgoing zone transfers at your primary provider and create a peer DNS server on your Cloudflare account.
+2. Enable outgoing zone transfers at your primary provider and create a peer DNS server on your Cloudflare account.
 
 {{<render file="_create-peer-server.md">}}
 
-2. Link your Cloudflare zone to the peer DNS server you just created.
+3. Link your Cloudflare zone to the peer DNS server you just created.
 
 {{<tabs labels="Dashboard | API">}}
 {{<tab label="dashboard" no-code="true">}}
@@ -134,4 +136,4 @@ Use the [Update Secondary Zone Configuration endpoint](/api/operations/secondary
 {{</tab>}}
 {{</tabs>}}
 
-3. In [**DNS** > **Settings**](https://dash.cloudflare.com/?to=/:account/:zone/dns/settings), confirm the linked peer is listed under **DNS Zone Transfers**, and select **Initiate zone transfer**. Alternatively, you can use the [Force AXFR endpoint](/api/operations/secondary-dns-(-secondary-zone)-force-axfr).
+4. In [**DNS** > **Settings**](https://dash.cloudflare.com/?to=/:account/:zone/dns/settings), confirm the linked peer is listed under **DNS Zone Transfers**, and select **Initiate zone transfer**. Alternatively, you can use the [Force AXFR endpoint](/api/operations/secondary-dns-(-secondary-zone)-force-axfr).

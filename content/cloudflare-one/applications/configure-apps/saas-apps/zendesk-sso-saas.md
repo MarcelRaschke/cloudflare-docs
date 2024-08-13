@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: Zendesk
-weight: 22
+updated: 2024-04-29
+weight: 29
 ---
 
 # Connect to Zendesk through Access

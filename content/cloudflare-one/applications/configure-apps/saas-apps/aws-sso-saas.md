@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: AWS
-weight: 5
+updated: 2024-04-22
+weight: 6
 ---
 
 # Connect to AWS through Access

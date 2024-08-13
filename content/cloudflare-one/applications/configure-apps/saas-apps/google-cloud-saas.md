@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: Google Cloud
-weight: 9
+updated: 2024-07-03
+weight: 13
 ---
 
 # Connect to Google Cloud through Access

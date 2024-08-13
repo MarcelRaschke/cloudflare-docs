@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: DocuSign
-weight: 8
+updated: 2024-06-18
+weight: 10
 ---
 
 # Connect to DocuSign through Access

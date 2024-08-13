@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: Atlassian Cloud
-weight: 4
+updated: 2024-06-18
+weight: 5
 ---
 
 # Connect to Atlassian Cloud through Access

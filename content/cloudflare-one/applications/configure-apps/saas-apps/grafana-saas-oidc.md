@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: Grafana
-weight: 10
+updated: 2024-07-18
+weight: 14
 ---
 
 # Connect to Grafana through Access

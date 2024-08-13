@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: Jamf Pro
-weight: 13
+updated: 2024-06-18
+weight: 18
 ---
 
 # Connect to Jamf Pro through Access

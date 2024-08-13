@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: Slack
-weight: 18
+updated: 2024-06-18
+weight: 24
 ---
 
 # Connect to Slack through Access

@@ -8,11 +8,20 @@ inputParameters: mwanAccount
 
 # Cloud on-ramps
 
-Magic Cloud Networking {{<inline-pill style="beta">}} allows you to create on-ramps from your cloud networks to Magic WAN. Cloudflare will create virtual private network (VPN) tunnels between Magic WAN and your virtual private cloud (VPC), configuring both sides of the connection on your behalf. Cloudflare orchestrates the cloud provider's native VPN functionality, without requiring deployment of any additional compute virtual machines (VMs).
+Magic Cloud Networking (beta) allows you to create on-ramps from your cloud networks to Magic WAN. Cloudflare will create virtual private network (VPN) tunnels between Magic WAN and your virtual private cloud (VPC), configuring both sides of the connection on your behalf. Cloudflare orchestrates the cloud provider's native VPN functionality, without requiring deployment of any additional compute virtual machines (VMs).
 
 $1
 
 {{<Aside type="note">}} Make sure you have configured a [Cloud Integration](/magic-cloud-networking/get-started/) before adding a Magic WAN Cloud on-ramp.{{</Aside>}}
+
+## Available on-ramps
+
+Magic Cloud Networking has the following cloud on-ramps integrations:
+- AWS
+- Azure
+- GCP
+
+Refer to [Reference](/magic-cloud-networking/reference/) to learn more about how Cloudflare orchestrates VPN connectivity to your cloud networks.
 
 ## Create a Magic WAN cloud on-ramp
 

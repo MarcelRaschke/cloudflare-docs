@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: Google Workspace
-weight: 9
+updated: 2024-06-04
+weight: 13
 ---
 
 # Connect to Google Workspace through Access

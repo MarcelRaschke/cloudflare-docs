@@ -1,7 +1,7 @@
 ---
 pcx_content_type: concept
 title: Transform Rules
-weight: 3
+weight: 4
 ---
 
 # Transform Rules
@@ -16,6 +16,8 @@ There are several types of Transform Rules:
 * [**Managed Transforms**](/rules/transform/managed-transforms/): Perform common adjustments to HTTP request and response headers with the click of a button.
 
 To configure Transform Rules in the dashboard, go to the **Transform Rules** page in Rules.
+
+{{<render file="_snippets-alternative.md" withParameters="header modifications and rewrite logic">}}<br />
 
 {{<render file="_rules-requirements.md" withParameters="Transform Rules require">}}
 

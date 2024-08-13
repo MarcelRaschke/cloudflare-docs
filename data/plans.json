@@ -1039,6 +1039,27 @@
         }
       }
     },
+    "cloud_connector": {
+      "title": "Cloud Connector (beta)",
+      "link": "/rules/cloud-connector/",
+      "properties": {
+        "availability": {
+          "title": "Availability",
+          "summary": "Available on all plans",
+          "free": "Yes",
+          "pro": "Yes",
+          "biz": "Yes",
+          "ent": "Yes"
+        },
+        "num_rules": {
+          "title": "Number of rules",
+          "free": 5,
+          "pro": 25,
+          "biz": 50,
+          "ent": 125
+        }
+      }
+    },
     "config_rules": {
       "title": "Configuration Rules",
       "link": "/rules/configuration-rules/",
@@ -1170,6 +1191,13 @@
           "pro": 10,
           "biz": 25,
           "ent": 50
+        },
+        "subrequests": {
+          "title": "Number of {{<glossary-tooltip term_id=\"Snippets subrequest\" prepend=\"A subrequest is \">}}subrequests{{</glossary-tooltip>}}",
+          "free": 0,
+          "pro": 2,
+          "biz": 3,
+          "ent": 5
         }
       }
     },
@@ -1191,6 +1219,13 @@
           "pro": 25,
           "biz": 50,
           "ent": 125
+        },
+        "p_wildcard_support": {
+          "title": "Wildcard support",
+          "free": "Yes",
+          "pro": "Yes",
+          "biz": "Yes",
+          "ent": "Yes"
         },
         "regex_support": {
           "title": "Regex support",
@@ -1965,20 +2000,6 @@
         }
       }
     },
-    "auto_minify": {
-      "title": "Auto Minify (deprecated)",
-      "link": "/speed/optimization/content/auto-minify/",
-      "properties": {
-        "availability": {
-          "title": "Availability",
-          "summary": "Available on all plans",
-          "free": "Yes",
-          "pro": "Yes",
-          "biz": "Yes",
-          "ent": "Yes"
-        }
-      }
-    },
     "brotli": {
       "title": "Brotli compression",
       "link": "/speed/optimization/content/brotli/",
@@ -2009,7 +2030,7 @@
     },
     "enhanced_http2_prioritization": {
       "title": "Enhanced HTTP/2 Prioritization",
-      "link": "https://blog.cloudflare.com/better-http-2-prioritization-for-a-faster-web/",
+      "link": "/speed/optimization/protocol/enhanced-http2-prioritization/",
       "properties": {
         "availability": {
           "title": "Availability",

@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: Greenhouse Recruiting
-weight: 11
+updated: 2024-07-10
+weight: 15
 ---
 
 # Connect to Greenhouse Recruiting through Access

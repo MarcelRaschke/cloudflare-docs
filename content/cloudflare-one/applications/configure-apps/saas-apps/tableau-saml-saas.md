@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: Tableau Cloud
-weight: 20
+updated: 2024-07-03
+weight: 27
 ---
 
 # Connect to Tableau Cloud through Access

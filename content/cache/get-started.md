@@ -36,7 +36,7 @@ Configure your settings to cache static HTML or cache anonymous page views of dy
 - [Customize Caching with Cache Rules](/cache/how-to/cache-rules/)
 - [Specify which resources to cache](/cache/concepts/customize-cache/)
 - [Understand Origin Cache Control](/cache/concepts/cache-control/)
-- [Cache by device type (Enterprise only)](/cache/how-to/edge-browser-cache-ttl/create-page-rules/#cache-by-device-type-enterprise-only)
+- [Cache by device type (Enterprise only)](/cache/how-to/cache-rules/examples/cache-device-type/)
 
 ## Improve cache hit rates
 
@@ -63,7 +63,6 @@ These code alterations only occur on the cacheable objects found at Cloudflare's
 
 Review the list of Cloudflare features that function in this manner:
 
-- [Auto Minify](/speed/optimization/content/auto-minify/) (deprecated)
 - [Rocket Loader](/speed/optimization/content/rocket-loader/)
 - [Polish](/images/polish/)
 - [Mirage](/speed/optimization/images/mirage/)

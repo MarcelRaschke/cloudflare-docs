@@ -1,6 +1,7 @@
 # homepage
 /docs/ /products/ 301
 /zero-trust/ /products/?product-group=Cloudflare+One 301
+/dashboarding-landing/ / 301
 /tutorials/ /search/?content_type%5B0%5D=Tutorial 301
 
 # 1dot1_redirect
@@ -98,7 +99,23 @@
 
 # analytics
 /analytics/migration-guides/zone-analytics/ /analytics/graphql-api/migration-guides/zone-analytics/ 301
-/analytics/web-analytics/about/ /analytics/web-analytics/ 301
+/analytics/web-analytics/about/ /web-analytics/about 301
+/analytics/web-analytics/ /web-analytics/ 301
+/analytics/web-analytics/getting-started/ /web-analytics/get-started/ 301
+/analytics/web-analytics/getting-started/web-analytics-spa/ /web-analytics/get-started/web-analytics-spa/ 301
+/analytics/web-analytics/getting-started/notifications/ /web-analytics/get-started/notifications/ 301
+/analytics/web-analytics/configuring-web-analytics/ /web-analytics/configuration-options/ 301
+/analytics/web-analytics/configuring-web-analytics/filters/ /web-analytics/configuration-options/filters/ 301
+/analytics/web-analytics/configuring-web-analytics/rules/ /web-analytics/configuration-options/rules/ 301
+/analytics/web-analytics/understanding-web-analytics/ /web-analytics/data-metrics/ 301
+/analytics/web-analytics/understanding-web-analytics/core-web-vitals/ /web-analytics/data-metrics/core-web-vitals/ 301
+/analytics/web-analytics/understanding-web-analytics/high-level-metrics/ /web-analytics/data-metrics/high-level-metrics/ 301
+/analytics/web-analytics/understanding-web-analytics/page-load-time-summary/ /web-analytics/data-metrics/page-load-time-summary/ 301
+/analytics/web-analytics/understanding-web-analytics/dimensions/ /web-analytics/data-metrics/dimensions/ 301
+/analytics/web-analytics/understanding-web-analytics/data-origin-and-collection/ /web-analytics/data-metrics/data-origin-and-collection/ 301
+/analytics/web-analytics/understanding-web-analytics/limits/ /web-analytics/limits/ 301
+/analytics/faq/web-analytics/ /web-analytics/faq/ 301
+/analytics/web-analytics/changelog/ /web-analytics/changelog/ 301
 /support/analytics/ /analytics/ 301
 /support/analytics/essentials/ /analytics/ 301
 /support/analytics/essentials/understanding-cloudflare-account-analytics-beta/ /analytics/account-and-zone-analytics/account-analytics/ 301
@@ -174,7 +191,7 @@
 /cache/about/crawler-hints/ /cache/advanced-configuration/crawler-hints/ 301
 /cache/how-to/enable-crawler-hints/ /cache/advanced-configuration/crawler-hints/#enable-crawler-hints 301
 /cache/about/edge-browser-cache-ttl/ /cache/how-to/edge-browser-cache-ttl/ 301
-/cache/how-to/create-page-rules/ /cache/how-to/edge-browser-cache-ttl/create-page-rules/ 301
+/cache/how-to/create-page-rules/ /cache/how-to/cache-rules/ 301
 /cache/how-to/set-browser-ttl/ /cache/how-to/edge-browser-cache-ttl/set-browser-ttl/ 301
 /cache/about/cache-rules/ /cache/how-to/cache-rules/ 301
 /cache/about/cache-keys/ /cache/how-to/cache-keys/ 301
@@ -202,6 +219,7 @@
 /support/page-rules/best-practice-caching-everything-while-ignoring-query-strings/ /cache/how-to/cache-rules/examples/cache-everything-ignore-query-strings/ 301
 /cache/troubleshooting/cache-everything-ignore-query-strings/ /cache/how-to/cache-rules/examples/cache-everything-ignore-query-strings/ 301
 /cache/troubleshooting/chunked-encoding-and-dynamic-content/ /cache/how-to/cache-rules/ 301
+/cache/how-to/edge-browser-cache-ttl/create-page-rules/ /cache/how-to/cache-rules/ 301
 
 # china network
 /support/about-cloudflare/enterprise-documentation/understanding-and-configuring-an-icp-number/ /china-network/concepts/icp/ 301
@@ -265,6 +283,7 @@
 /d1/configuration/local-development/ /d1/build-with-d1/local-development/ 301
 /d1/configuration/remote-development/ /d1/build-with-d1/remote-development/ 301
 /d1/build-with-d1/import-data/  /d1/build-with-d1/import-export-data/ 301
+/d1/reference/database-commands/ /d1/reference/sql-statements/ 301
 
 # data loss prevention (dlp)
 /cloudflare-one/policies/data-loss-prevention/integration-profiles/ /cloudflare-one/policies/data-loss-prevention/dlp-profiles/integration-profiles/ 301
@@ -552,7 +571,6 @@
 /images/variants/ /images/manage-images/enable-flexible-variants/ 301
 /images/worker/ /images/transform-images/transform-via-workers/ 301
 /support/troubleshooting/general-troubleshooting/troubleshoot-common-cf-polished-statuses/ /images/polish/cf-polished-statuses/ 301
-/support/troubleshooting/general-troubleshooting/troubleshoot-image-resizing-problems/ /images/troubleshooting/ 301
 /images/cloudflare-images/ /images/ 301
 /images/cloudflare-images/api-request/ /images/get-started/ 301
 /images/cloudflare-images/images-analytics/ /images/ 301
@@ -581,12 +599,15 @@
 /images/cloudflare-images/upload-images/direct-creator-upload/ /images/upload-images/direct-creator-upload/ 301
 /images/cloudflare-images/upload-images/images-batch/ /api/operations/cloudflare-images-list-images 301
 /images/cloudflare-images/upload-images/upload-via-url/ /images/upload-images/upload-url/ 301
-/images/faq /images/ 301
+/images/faq/ /images/ 301
 /images/image-resizing/ /images/manage-images/create-variants/ 301
 /images/image-resizing/format-limitations/ /images/transform-images/ 301
 /images/image-resizing/url-format/ /images/transform-images/ 301
 /images/image-resizing/resize-with-workers/ /images/transform-images/transform-via-workers/ 301
 /images/image-resizing/responsive-images/ /images/manage-images/create-variants/ 301
+/images/security/ /images/reference/security/ 301
+/images/troubleshooting/ /images/reference/troubleshooting/ 301
+/images/platform/pricing/ /images/pricing/ 301
 
 
 # learning-paths
@@ -680,9 +701,9 @@
 /magic-transit/magic-firewall/ /magic-firewall/ 301
 /magic-transit/set-up/onboarding/ /magic-transit/get-started/ 301
 /magic-transit/set-up/provide-configuration-data/assign-tunnel-route-priorities/ /magic-transit/how-to/configure-static-routes/ 301
-/magic-transit/set-up/requirements/ /magic-transit/prerequisites/ 301
+/magic-transit/set-up/requirements/ /magic-transit/get-started/ 301
 /magic-transit/get-started/configure-tunnels/specify-gre-tunnel-endpoints/ /magic-transit/how-to/configure-tunnels/ 301
-/magic-transit/get-started/requirements/ /magic-transit/prerequisites/ 301
+/magic-transit/get-started/requirements/ /magic-transit/get-started/ 301
 /magic-transit/about/bandwidth-measurement/ /magic-transit/reference/bandwidth-measurement/ 301
 /magic-transit/about/health-checks/ /magic-transit/reference/tunnel-health-checks/ 301
 /magic-transit/about/probe-construction/ /magic-transit/reference/tunnel-health-checks/ 301
@@ -691,6 +712,7 @@
 /magic-transit/reference/ipsec/ /magic-transit/reference/tunnels/#ipsec-tunnels 301
 /magic-transit/flow-based-monitoring/ /magic-transit/magic-network-monitoring/ 301
 /magic-transit/how-to/auto-advertise-prefixes/ /magic-network-monitoring/rules/ 301
+/magic-transit/prerequisites/ /magic-transit/get-started/ 301
 
 # magic-wan
 /magic-wan/tutorials/ipsec/ /magic-wan/reference/tunnels/#ipsec-tunnels 301
@@ -719,6 +741,7 @@
 /magic-wan/configuration/common-settings/tunnel-health-checks/ /magic-wan/configuration/manually/how-to/tunnel-health-checks/ 301
 /magic-wan/configuration/manually/how-to/view-analytics/ /magic-wan/analytics/ 301
 /magic-wan/configuration/common-settings/view-analytics/ /magic-wan/analytics/ 301
+/magic-wan/prerequisites/ /magic-wan/get-started/ 301
 
 # notifications
 /fundamentals/notifications/ /notifications/ 301
@@ -739,6 +762,7 @@
 /pages/how-to/deploy-a-jekyll-site/ /pages/framework-guides/deploy-a-jekyll-site/ 301
 /pages/how-to/deploy-a-nextjs-site/ /pages/framework-guides/nextjs/ 301
 /pages/framework-guides/deploy-a-nextjs-site/ /pages/framework-guides/nextjs/ 301
+/pages/framework-guides/nextjs/deploy-a-nextjs-site/ /pages/framework-guides/nextjs/ssr/get-started/ 301
 /pages/how-to/deploy-anything/ /pages/framework-guides/deploy-anything/ 301
 /pages/how-to/deploy-a-react-application/ /pages/framework-guides/deploy-a-react-site/ 301
 /pages/framework-guides/deploy-a-react-application/ /pages/framework-guides/deploy-a-react-site/ 301
@@ -899,9 +923,9 @@
 /support/speed/optimization-delivery/ /speed/optimization/images/ 301
 /support/speed/optimization-delivery/configuring-cloudflare-mirage/ /speed/optimization/images/mirage/ 301
 /support/speed/optimization-mobile/understanding-cloudflare-mobile-redirect/ /speed/optimization/other/mobile-redirect/ 301
-/support/speed/optimization-file-size/using-cloudflare-auto-minify/ /speed/optimization/content/auto-minify/ 301
+/support/speed/optimization-file-size/using-cloudflare-auto-minify/ /speed/optimization/content/ 301
 /support/speed/optimization-file-size/what-will-cloudflare-compress/ /speed/optimization/content/brotli/ 301
-/support/speed/optimization-file-size/why-isnt-auto-minify-working/ /speed/optimization/content/troubleshooting/auto-minify-not-working/ 301
+/support/speed/optimization-file-size/why-isnt-auto-minify-working/ /speed/optimization/content/troubleshooting/ 301
 /support/speed/optimization-mobile/why-is-the-mobile-redirect-i-set-up-through-cloudflare-redirecting-my-static-assets/ /speed/optimization/other/troubleshooting/mobile-redirect-affect-static-assets/ 301
 /speed/optimization/other/amp-real-ulr/ /speed/optimization/other/amp-real-url/ 301
 /speed/optimization/other/amp-real-ulr/enable-amp-real-url/ /speed/optimization/other/amp-real-url/enable-amp-real-url/ 301
@@ -909,6 +933,8 @@
 /speed/optimization/other/mobile-redirect/ /rules/url-forwarding/examples/perform-mobile-redirects/ 301
 /speed/optimization/other/troubleshooting/mobile-redirect-affect-static-assets/ /speed/optimization/other/ 301
 /speed/optimization/other/troubleshooting/ /speed/optimization/other/ 301
+/speed/optimization/content/auto-minify/ /speed/optimization/content/ 301
+/speed/optimization/content/troubleshooting/auto-minify-not-working/ /speed/optimization/content/troubleshooting/ 301
 
 # ssl
 /ssl/ssl-for-saas/certificate-signing-requests/ /cloudflare-for-platforms/cloudflare-for-saas/security/certificate-management/custom-certificates/certificate-signing-requests/ 301
@@ -917,12 +943,15 @@
 /ssl/client-certificates/byo-ca-api-shield/ /ssl/client-certificates/byo-ca/ 301
 /ssl/edge-certificates/certificate-transparency-monitoring/ /ssl/edge-certificates/additional-options/certificate-transparency-monitoring/ 301
 /ssl/edge-certificates/custom-certificates/caa-records/ /ssl/edge-certificates/caa-records/ 301
+/ssl/edge-certificates/disable-weak-cipher-suites/ /ssl/edge-certificates/additional-options/cipher-suites/customize-cipher-suites/ 301
 /ssl/edge-certificates/http-strict-transport-security/ /ssl/edge-certificates/additional-options/http-strict-transport-security/ 301
 /ssl/edge-certificates/universal-ssl/changing-dcv-method/ /ssl/edge-certificates/changing-dcv-method/ 301
 /ssl/edge-certificates/uploading/ /ssl/edge-certificates/custom-certificates/uploading/ 301
 /ssl/keyless-ssl/hardware-security-modules/ncipher-thales-nshield-connect/ /ssl/keyless-ssl/hardware-security-modules/entrust-nshield-connect/ 301
 /ssl/mutual-authentication/ /cloudflare-one/identity/devices/access-integrations/mutual-tls-authentication/ 301
 /ssl/reference/certificate-validation-options/ /ssl/concepts/#validation-level 301
+/ssl/reference/cipher-suites/custom-certificates/ /ssl/edge-certificates/custom-certificates/#certificate-packs 301
+/ssl/reference/cipher-suites/matching-on-origin/ /ssl/origin-configuration/cipher-suites/#match-on-origin 301
 /ssl/reference/validation-backoff-schedule/ /ssl/edge-certificates/changing-dcv-method/validation-backoff-schedule/ 301
 /ssl/universal-ssl/changing-dcv-method/ /ssl/edge-certificates/changing-dcv-method/ 301
 /support/dns/how-to/certification-authority-authorization-caa-faq/ /ssl/edge-certificates/troubleshooting/caa-records/ 301
@@ -948,7 +977,8 @@
 /cloudflare-for-platforms/workers-for-platforms/platform/observability/ /cloudflare-for-platforms/workers-for-platforms/reference/observability/ 301
 /cloudflare-for-platforms/workers-for-platforms/platform/outbound-workers/ /cloudflare-for-platforms/workers-for-platforms/reference/outbound-workers/ 301
 /cloudflare-for-platforms/workers-for-platforms/platform/tags/ /cloudflare-for-platforms/workers-for-platforms/reference/tags/ 301
-/cloudflare-for-platforms/workers-for-platforms/platform/metadata/  /cloudflare-for-platforms/workers-for-platforms/reference/metadata/ 301
+/cloudflare-for-platforms/workers-for-platforms/platform/metadata/ /workers/configuration/multipart-upload-metadata/ 301
+/cloudflare-for-platforms/workers-for-platforms/reference/metadata/ /workers/configuration/multipart-upload-metadata/ 301
 /cloudflare-for-platforms/workers-for-platforms/platform/custom-limits/ /cloudflare-for-platforms/workers-for-platforms/configuration/custom-limits/ 301
 /cloudflare-for-platforms/workers-for-platforms/reference/observability/ /cloudflare-for-platforms/workers-for-platforms/configuration/observability/ 301
 /cloudflare-for-platforms/workers-for-platforms/reference/outbound-workers/ /cloudflare-for-platforms/workers-for-platforms/configuration/outbound-workers/ 301
@@ -974,6 +1004,10 @@
 /stream/uploading-videos/using-webhooks/ /stream/manage-video-library/using-webhooks/ 301
 /stream/edit-manage-videos/edit-videos/adding-captions/ /stream/edit-videos/adding-captions/ 301
 /stream/viewing-videos/using-the-player-api/ /stream/viewing-videos/using-the-stream-player/using-the-player-api/ 301
+/stream/changelog/ /stream/platform/changelog/ 301
+/stream/changelog/index.xml /stream/platform/changelog/index.xml 301
+/stream/webrtc-beta/ /stream/platform/webrtc-beta/ 301
+/stream/faq/ /stream/reference/faq/ 301
 
 # support
 
@@ -1093,6 +1127,7 @@
 /r2/buckets/data-location/ /r2/reference/data-location/ 301
 /r2/reference/audit-logs/ /r2/platform/audit-logs/ 301
 /r2/reference/changelog/ /r2/platform/changelog/ 301
+/r2/reference/changelog/index.xml /r2/platform/changelog/index.xml 301
 /r2/reference/limits/ /r2/platform/limits/ 301
 /r2/reference/metrics-analytics/ /r2/platform/metrics-analytics/ 301
 
@@ -1122,6 +1157,8 @@
 /turnstile/reference/feedback-reports/ /turnstile/troubleshooting/feedback-reports/ 301
 /turnstile/reference/rotate-secret-key/ /turnstile/troubleshooting/rotate-secret-key/ 301
 /turnstile/reference/testing/ /turnstile/troubleshooting/testing/ 301
+/turnstile/reference/use-cases/ /turnstile/tutorials/ 301
+/turnstile/reference/use-cases/login-pages/ /turnstile/tutorials/login-pages/ 301
 
 # waf
 /waf/about/file-scanning/ /waf/about/content-scanning/ 301
@@ -1415,9 +1452,12 @@
 /kv/platform/environments/ /kv/reference/environments/ 301
 /kv/platform/kv-commands/ /kv/reference/kv-commands/ 301
 /kv/learning/ /kv/reference/ 301
-/kv/learning/how-kv-works/ /kv/reference/how-kv-works/ 301
-/kv/learning/kv-bindings/ /kv/reference/kv-bindings/ 301
-/kv/learning/kv-namespaces/ /kv/reference/kv-namespaces/ 301
+/kv/learning/how-kv-works/ /kv/concepts/how-kv-works/ 301
+/kv/learning/kv-bindings/ /kv/concepts/kv-bindings/ 301
+/kv/learning/kv-namespaces/ /kv/concepts/kv-namespaces/ 301
+/kv/reference/how-kv-works/ /kv/concepts/how-kv-works/ 301
+/kv/reference/kv-bindings/ /kv/concepts/kv-bindings/ 301
+/kv/reference/kv-namespaces/ /kv/concepts/kv-namespaces/ 301
 /kv/tutorials/workers-kv-from-rust/ /workers/tutorials/workers-kv-from-rust/ 301
 
 # vectorize
@@ -1636,6 +1676,7 @@
 /rules/bulk-redirects/* /rules/url-forwarding/bulk-redirects/:splat 301
 /rules/url-forwarding/dynamic-redirects/* /rules/url-forwarding/single-redirects/:splat 301
 /ssl/ssl-tls/* /ssl/reference/:splat 301
+/ssl/reference/cipher-suites/* /ssl/edge-certificates/additional-options/cipher-suites/:splat 301
 /support/account-management-billing/billing-cloudflare-add-on-services/* https://www.cloudflare.com/plans/ 301
 /tenant/tutorial/* /tenant/get-started/ 301
 /waf/managed-rulesets/* /waf/managed-rules/:splat 301
@@ -1706,4 +1747,3 @@
 /support/speed/* /speed/ 301
 /support/troubleshooting/planned-maintenance/* /support/troubleshooting/disruptive-maintenance/ 301
 /support/cloudflare-client-api/* /fundamentals/api/ 301
-

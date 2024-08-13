@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: Braintree
-weight: 6
+updated: 2024-08-01
+weight: 7
 ---
 
 # Connect to Braintree through Access

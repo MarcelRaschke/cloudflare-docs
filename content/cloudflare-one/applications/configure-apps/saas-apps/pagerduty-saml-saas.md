@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: PagerDuty
-weight: 14
+updated: 2024-07-10
+weight: 20
 ---
 
 # Connect to PagerDuty through Access

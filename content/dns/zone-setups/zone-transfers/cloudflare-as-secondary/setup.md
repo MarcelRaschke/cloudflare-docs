@@ -64,29 +64,7 @@ Get the following values from your Cloudflare account:
 
 ## 2. Create Peer Server
 
-{{<tabs labels="Dashboard | API">}}
-{{<tab label="dashboard" no-code="true">}}
-
-To create a peer server using the dashboard:
-
-1. Log in to the [Cloudflare dashboard](https://dash.cloudflare.com/login) and select your account.
-2. Go to **Manage Account** > **Configurations**.
-3. Click **DNS Zone Transfers**.
-4. For **Peer DNS servers**, click **Create**.
-5. Enter the following information, paying particular attention to:
-    - **IP**: Specifies where Cloudflare sends transfer requests to.
-    - **Port**: Specifies the IP Port for the transfer IP.
-    - **Enable incremental (IXFR) zone transfers**: Specifies if Cloudflare sends IXFR requests in addition to the default AXFR requests.
-    - **Link a an existing TSIG**: If desired, link the TSIG you [previously created](#1-create-tsig-optional).
-6. Click **Create**.
-
-{{</tab>}}
-{{<tab label="api" no-code="true">}}
-
-To create a peer DNS server using the API, send a [POST request](/api/operations/secondary-dns-(-peer)-create-peer).
-
-{{</tab>}}
-{{</tabs>}}
+{{<render file="_create-peer-server.md">}}
 
 ## 3. Create the Secondary Zone
 
@@ -120,9 +98,9 @@ To create a secondary zone using the API, send a [POST](/api/operations/secondar
 
 ## 4. Update registrar
 
-At your registrar, add the secondary nameservers [specified in the Cloudflare dashboard](/dns/zone-setups/full-setup/setup/#get-nameserver-names).
+At your registrar, add the secondary nameservers [specified in the Cloudflare dashboard](/dns/zone-setups/full-setup/setup/#get-nameserver-names). Do not remove your primary DNS provider's nameservers.
 
-When you have added them, go into your new secondary zone and click **Done, check nameservers**.
+When you have added the Cloudflare nameservers, go into your new secondary zone and click **Done, check nameservers**.
 
 ## 5. Create notifications (optional)
 

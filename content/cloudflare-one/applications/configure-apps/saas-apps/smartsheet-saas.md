@@ -1,7 +1,8 @@
 ---
-pcx_content_type: how-to
+pcx_content_type: integration-guide
 title: Smartsheet
-weight: 19
+updated: 2024-07-08
+weight: 25
 ---
 
 # Connect to Smartsheet through Access

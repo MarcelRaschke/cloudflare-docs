@@ -66,12 +66,13 @@ Perform the following steps to create the rule:
 
 2. (Optional) If the response did not include a ruleset with `"kind": "zone"` and `"phase": "http_log_custom_fields"`, create the phase entry point ruleset using the [Create ruleset](/ruleset-engine/rulesets-api/create/) operation:
 
-    ```json
+    ```bash
     curl -X POST \
     "https://api.cloudflare.com/client/v4/zones/<ZONE_ID>/rulesets" \
-    -H "X-Auth-Email: <EMAIL>" \
-    -H "X-Auth-Key: <API_KEY>" \
-    -d '{
+    --header "X-Auth-Email: <EMAIL>" \
+    --header "X-Auth-Key: <API_KEY>" \
+    --header "Content-Type: application/json" \
+    --data '{
       "name": "Zone-level phase entry point",
       "kind": "zone",
       "description": "This ruleset configures custom log fields.",
@@ -85,12 +86,13 @@ Perform the following steps to create the rule:
 
     The following example configures custom fields with the names of the HTTP request headers, HTTP response headers, and cookies you wish to include in Logpush logs:
 
-    ```json
+    ```bash
     curl -X PUT \
     "https://api.cloudflare.com/client/v4/zones/<ZONE_ID>/rulesets/<RULESET_ID>" \
-    -H "X-Auth-Email: <EMAIL>" \
-    -H "X-Auth-Key: <API_KEY>" \
-    -d '{
+    --header "X-Auth-Email: <EMAIL>" \
+    --header "X-Auth-Key: <API_KEY>" \
+    --header "Content-Type: application/json" \
+    --data '{
       "rules": [
         {
           "action": "log_custom_field",
@@ -168,7 +170,7 @@ Perform the following steps to create the rule:
 
 ### 2. Include the custom fields in your Logpush job
 
-Next, include `Cookies`, `RequestHeaders`, and/or `ResponseHeaders`, depending on your custom field configuration, in the list of fields of the `logpull_options` job parameter when creating or updating a job. The logs will contain the configured custom fields and their values in the request/response.
+Next, include `Cookies`, `RequestHeaders`, and/or `ResponseHeaders`, depending on your custom field configuration, in the list of fields of the `output_options` job parameter when creating or updating a job. The logs will contain the configured custom fields and their values in the request/response.
 
 For example, consider the following request that creates a job that includes custom fields:
 
@@ -181,7 +183,10 @@ curl -X POST \
   "name":"<DOMAIN_NAME>",
   "destination_conf": "s3://<BUCKET_PATH>?region=us-west-2",
   "dataset": "http_requests",
-  "logpull_options":"fields=RayID,EdgeStartTimestamp,Cookies,RequestHeaders,ResponseHeaders&timestamps=rfc3339",
+  "output_options": {
+      "field_names": ["RayID", "EdgeStartTimestamp", "Cookies", "RequestHeaders", "ResponseHeaders"],
+      "timestamp_format": "rfc3339"
+    },
   "ownership_challenge":"00000000000000000000"
 }'
 ```

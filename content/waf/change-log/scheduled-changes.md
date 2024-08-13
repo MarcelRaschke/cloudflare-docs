@@ -23,13 +23,22 @@ layout: wide
   </thead>
   <tbody>
     <tr>
-      <td>2024-07-17</td>
-      <td>2024-07-24</td>
+      <td>2024-08-12</td>
+      <td>2024-08-19</td>
       <td>Log</td>
-      <td>100524_BETA</td>
-      <td>{{<rule-id>}}b7a491c20a5f4f079f8d2a997d0a9131{{</rule-id>}}</td>
-      <td>Java - Remote Code Execution - Beta</td>
-      <td>This will replace rule 100524 in old WAF and {{<rule-id>}}d58ebf5351d843d3a39a4480f2cc4e84{{</rule-id>}} in new WAF</td>
+      <td>100666</td>
+      <td>{{<rule-id>}}7ff77f19b2ec4f1dab9f031ef3f42616{{</rule-id>}}</td>
+      <td>Apache OFBiz - Remote Code Execution - CVE:CVE-2024-32113</td>
+      <td>New Detection</td>
+    </tr>
+    <tr>
+      <td>2024-08-12</td>
+      <td>2024-08-19</td>
+      <td>Log</td>
+      <td>100665</td>
+      <td>{{<rule-id>}}e960ac54d6e841cebcfe89d571eefd6f{{</rule-id>}}</td>
+      <td>Zoho ManageEngine - Remote Code Execution - CVE:CVE-2023-29084</td>
+      <td>New Detection</td>
     </tr>
   </tbody>
 </table>
